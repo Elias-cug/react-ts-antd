@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import routes from './router'
+import routes from './router.config'
 
 function Routes({routes}) {
   return routes.map(route => (<Route key={route.path} exact path={route.path} component={route.component} />))
