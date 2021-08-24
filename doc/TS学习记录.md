@@ -32,14 +32,35 @@ npx create-react-app react-ts --template typescript
 
 2. React 中可以直接使用的一些类型
 
-2.1 React.FunctionComponent<p: T>
+2.1 声明函数式组件：React.FunctionComponent<p: T>
 
 ```ts
+import React from 'react'
+// 命名规范：ComponentName|Props
 interface EditorProps {
   detail: string
 }
-const Editor: React.FunctionComponent<props: EditorProps> = () => {
+const Editor: React.FC<props: EditorProps> = (props) => {
+  const {detail} = props
+  return (<div>{detail}</div>)
+}
+
+// 也可以这样
+const Editor: (props: EditorProps) => {
   const {detail} = props
   return (<div>{detail}</div>)
 }
 ```
+
+2.2 设置children：React.ReactNode
+
+```ts
+import React from 'react'
+interface CardProps {
+  title: string;
+  children: React.ReactNode;
+}
+```
+
+2.3 
+
