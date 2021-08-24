@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import Routes from "./router/router";
+import Routes from "./router/index";
 import store from './store/index'
 
 ReactDOM.render(
