@@ -9,16 +9,20 @@ const commonRoute: object[] = [
     meta: {title: '登录', icon:''},
   }
 ]
-const routesHasChild: object[]= [...commonRoute,settingRouter]
+const routesHasChild: object[]= [...commonRoute, settingRouter]
 const routes: object[] = []
 
-routesHasChild.forEach(item => {
-  handleRouter(item)
-})
+handleRouter(routesHasChild)
 
 function handleRouter(route){
-  if(route.children) {
-    handleRouter(route.children)
+  if(Array.isArray(route)) {
+    route.forEach(item => {
+      handleRouter(item)
+    })
+  } else if(route.children) {
+    route.children.forEach(item => {
+      handleRouter(item)
+    })
   } else {
     routes.push(route)
   }
