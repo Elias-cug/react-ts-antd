@@ -1,12 +1,17 @@
 import settingRouter from "./moudles/setting-router"
 import commonRoute from "./moudles/common-router"
-
-const routesHasChild: object[]= [...commonRoute, settingRouter]
-const routes: object[] = []
+interface Route {
+  path: string,
+  isExact?: boolean,
+  component?: any,
+  meta: any,
+  children?: Route[]
+}
+const routesHasChild= [...commonRoute, settingRouter]
+const routes: Route[]= []
 
 handleRouter(routesHasChild)
-
-function handleRouter(route){
+function handleRouter(route: Route[] | Route){
   if(Array.isArray(route)) {
     route.forEach(item => {
       handleRouter(item)

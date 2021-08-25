@@ -1,5 +1,5 @@
 import Login from "../../page/login"
-const commonRoute: object[] = [
+const commonRoute = [
   {
     path: '/',
     isExact: true,
