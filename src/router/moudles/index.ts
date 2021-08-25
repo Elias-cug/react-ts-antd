@@ -1,5 +1,5 @@
-import settingRouter from "./moudles/setting-router"
-import commonRoute from "./moudles/common-router"
+import settingRouter from "./setting-router"
+import commonRoute from "./common-router"
 interface Route {
   path: string,
   isExact?: boolean,

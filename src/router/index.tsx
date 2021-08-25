@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import routes from './router.config'
+import routes from './moudles'
 
 function Routes({routes}) {
   return routes.map(route => (<Route key={route.path} exact path={route.path} component={route.component} />))
