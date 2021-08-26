@@ -1,7 +1,13 @@
-// first
-
-function first(str: string) {
-  return str
+interface Famaily {
+  add: string;
+  father: string;
+  fatherAge: number
 }
 
-first('aaa')
+let obj: Partial<Famaily>;
+
+obj = {
+  addf: 'beijing'
+}
+
+console.log(obj);
