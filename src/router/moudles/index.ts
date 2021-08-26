@@ -1,17 +1,13 @@
 import settingRouter from "./setting-router"
 import commonRoute from "./common-router"
-interface Route {
-  path: string,
-  isExact?: boolean,
-  component?: any,
-  meta: any,
-  children?: Route[]
-}
-const routesHasChild= [...commonRoute, settingRouter]
-const routes: Route[]= []
+import { RouteType } from '../model/router-type'
+const routesHasChild = [...commonRoute, settingRouter]
+const routes: RouteType[]= []
 
 handleRouter(routesHasChild)
-function handleRouter(route: Route[] | Route){
+console.log(routes);
+
+function handleRouter(route: RouteType[] | RouteType){
   if(Array.isArray(route)) {
     route.forEach(item => {
       handleRouter(item)

@@ -1,10 +1,19 @@
-import React from 'react'
+import * as React from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import routes from './moudles'
+import { RouteType } from "./model/router-type";
 
-function Routes({routes}) {
-  return routes.map(route => (<Route key={route.path} exact path={route.path} component={route.component} />))
+interface RoutesProps {
+  routes: RouteType[]
 }
+
+const Routes: React.FC<RoutesProps> = (props: RoutesProps) => (
+  <div>
+    {(props.routes.map(route => (
+      <Route key={route.path} exact path={route.path} component={route.component} />
+    )))}
+  </div>
+)
 
 const Router =  () => {
   return (
