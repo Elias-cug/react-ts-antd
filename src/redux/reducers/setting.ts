@@ -1,4 +1,4 @@
-import * as constant from '../../configs/action';
+import * as constant from '../../configs/action.config';
 import { createReducer } from '../lib/common';
 
 const initialState = {

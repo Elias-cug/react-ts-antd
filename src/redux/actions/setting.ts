@@ -1,4 +1,4 @@
-import * as constant from '../../configs/action';
+import * as constant from '../../configs/action.config';
 
 export default {
     toggleAlert: () => ({
