@@ -1,5 +1,5 @@
-import DataAccess from '../../page/data-access';
-import DataStandardization from '../../page/data-standardization';
+import DataAccess from '@/page/data-access';
+import DataStandardization from '@/page/data-standardization';
 const layoutRouter = [
   {
     path: '/integration',

@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu } from 'antd';
-import layoutRouter from '../../router/moudles/layout-router';
-import { RouteType } from '../../types/router-type';
+import layoutRouter from '@/router/moudles/layout-router';
+import { RouteType } from '@/types/router-type';
 
 const { SubMenu } = Menu;
 interface SubMenuListProps {
@@ -10,7 +10,7 @@ interface SubMenuListProps {
 }
 
 const SubMenuList: FC<SubMenuListProps> = (props: SubMenuListProps) => {
-  console.log('渲染了');
+  console.log('渲染了SubMenuList');
   return (
     <div>
       {props.router.map(item => {
@@ -33,6 +33,7 @@ const SubMenuList: FC<SubMenuListProps> = (props: SubMenuListProps) => {
 };
 
 const MenuAside: FC = () => {
+  console.log('渲染了MenuAside');
   return (
     <div className='menu-aside'>
       <Menu mode='inline' theme='dark'>
