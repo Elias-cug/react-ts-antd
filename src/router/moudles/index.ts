@@ -1,11 +1,11 @@
-import settingRouter from "./setting-router"
-import commonRoute from "./common-router"
+import layoutRouter from "./layout-router"
+import noLayoutRouter from "./no-layout-router"
 import { RouteType } from '../model/router-type'
-const routesHasChild = [...commonRoute, settingRouter]
-const routes: RouteType[]= []
+const routesHasChild = [layoutRouter]
+const layoutRouterDepth0: RouteType[]= []
 
 handleRouter(routesHasChild)
-console.log(routes);
+console.log(layoutRouterDepth0);
 
 function handleRouter(route: RouteType[] | RouteType){
   if(Array.isArray(route)) {
@@ -17,8 +17,11 @@ function handleRouter(route: RouteType[] | RouteType){
       handleRouter(item)
     })
   } else {
-    routes.push(route)
+    layoutRouterDepth0.push(route)
   }
 }
 
-export default routes
+export default {
+  layoutRouter: layoutRouterDepth0,
+  noLayoutRouter: noLayoutRouter
+}

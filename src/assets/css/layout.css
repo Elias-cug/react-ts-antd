@@ -2,7 +2,8 @@
   width: 100%;
   height: 100%;
 }
-.app {
+.container {
+  height: 100%;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -10,9 +11,24 @@
 }
 
 .header {
-  width: 1263px;
+  width: 100%;
+  height: 48px;
   background-color: #2A3555;
   box-sizing: border-box;
+}
+
+.main-container-wrapper {
+  height: 100%;
+  display: flex;
+  flex: 1;
+}
+
+.main-container-wrapper .menu-aside {
+  width: 160px;
+  background: #1f2639;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  height: 100%;
 }
 
 

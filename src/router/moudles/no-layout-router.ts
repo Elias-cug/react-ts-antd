@@ -1,5 +1,5 @@
 import Login from "../../page/login"
-const commonRoute = [
+const noLayoutRouter = [
   {
     path: '/',
     isExact: true,
@@ -8,4 +8,4 @@ const commonRoute = [
   }
 ]
 
-export default commonRoute
+export default noLayoutRouter

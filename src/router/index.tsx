@@ -1,36 +1,16 @@
 import React, { FC } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import routes from './moudles'
-import { RouteType } from "./model/router-type";
-
-interface RoutesProps {
-  routes: RouteType[]
-}
-
-const Routes: FC<RoutesProps> = (props: RoutesProps) => (
-  <div>
-    {(props.routes.map(route => (
-      <Route key={route.path} exact path={route.path} component={route.component} />
-    )))}
-  </div>
-)
+import R from './moudles'
+import MainLayout from '../layout'
 
 const Router: FC =  () => {
   return (
     <BrowserRouter>
       <Switch>
-        <div className="app">
-          {/* header */}
-          <div className="header"></div>
-          <div className="container">
-            {/* 菜单 */}
-            <div className="aside-menu"></div>
-            {/* 带布局页面 */}
-            <div className="main-box">
-              <Routes routes={routes} />
-            </div>
-          </div>
-        </div>
+        {R.noLayoutRouter.map(item => <Route key={item.path} exact path={item.path} component={item.component}></Route>)}
+        <MainLayout>
+          {R.layoutRouter.map(item => <Route key={item.path} exact path={item.path} component={item.component}></Route>)}
+        </MainLayout>
       </Switch>
     </BrowserRouter>
   )

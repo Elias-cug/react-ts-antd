@@ -1,7 +1,7 @@
 import React from 'react'
 const Login = () => {
   return (
-    <div>登录页面</div>
+    <a href="/integration/data-access">登录页面</a>
   )
 }
 
