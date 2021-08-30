@@ -34,7 +34,7 @@ module.exports = {
   },
   settings: {
     react: {
-      version: '16.2.0'
+      version: '17.0.2'
     }
   },
 
@@ -46,4 +46,4 @@ module.exports = {
   rules: {
     'import/no-anonymous-default-export': 'off'
   }
-}
+};
