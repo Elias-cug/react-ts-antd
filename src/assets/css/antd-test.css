@@ -1,0 +1,11 @@
+.antd-test {
+  display: flex;
+  flex-direction: row;
+}
+.antd-test > div {
+  margin: 20px;
+}
+
+.form-item {
+  width: 150px;
+}

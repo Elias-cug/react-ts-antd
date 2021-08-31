@@ -4,6 +4,7 @@
 }
 .container {
   height: 100%;
+  min-width: 1263px;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -12,6 +13,7 @@
 
 .header {
   width: 100%;
+  min-width: 1263px;
   height: 48px;
   background-color: #2A3555;
   box-sizing: border-box;
@@ -29,6 +31,12 @@
   box-sizing: border-box;
   flex-shrink: 0;
   height: 100%;
+}
+
+.main-container-wrapper .main-content {
+  width: 100%;
+  padding: 24px 24px 24px 23px;
+  background-color: #F5F7FA;
 }
 
 

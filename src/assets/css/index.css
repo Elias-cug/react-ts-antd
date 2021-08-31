@@ -1,2 +1,7 @@
 @import '~antd/dist/antd.css';
 @import './layout.css';
+@import './antd-test.css';
+/* 
+* {
+  width: 100%;
+} */

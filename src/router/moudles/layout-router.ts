@@ -1,5 +1,6 @@
 import DataAccess from '@/page/data-access';
 import DataStandardization from '@/page/data-standardization';
+import { FormTest } from '@/page/antd-test';
 const layoutRouter = [
   {
     path: '/integration',
@@ -16,6 +17,18 @@ const layoutRouter = [
         isExact: true,
         component: DataStandardization,
         meta: { title: '数据标准化', icon: '' }
+      }
+    ]
+  },
+  {
+    path: '/test',
+    meta: { title: 'antd组件测试', icon: '' },
+    children: [
+      {
+        path: '/test/ant-form',
+        isExact: true,
+        component: FormTest,
+        meta: { title: '表单组件', icon: '' }
       }
     ]
   }
