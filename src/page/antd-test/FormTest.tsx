@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Select, Input, Card } from 'antd';
+import { Select, Input, Switch, Card } from 'antd';
 const { Option } = Select;
 
 const selectOptions = [
@@ -28,7 +28,7 @@ const selectOptions = [
 const AntdSelect = () => {
   return (
     <>
-      <span>单选: </span>
+      <span className='mr10'>单选: </span>
       <Select className='form-item' defaultValue='tiannana'>
         {selectOptions.map(item => (
           <Option key={item.id} value={item.id}>
@@ -43,7 +43,7 @@ const AntdSelect = () => {
 const AntdMultiSelect = () => {
   return (
     <>
-      <span>多选: </span>
+      <span className='mr10'>多选: </span>
       <Select className='form-item' defaultValue={['tiannana']} mode='multiple'>
         {selectOptions.map(item => (
           <Option key={item.id} value={item.id}>
@@ -58,8 +58,17 @@ const AntdMultiSelect = () => {
 const AntdInput = () => {
   return (
     <>
-      <span>输入框：</span>
+      <span className='mr10'>输入框：</span>
       <Input className='form-item' placeholder='请输入姓名'></Input>
+    </>
+  );
+};
+
+const AntdSwitch = () => {
+  return (
+    <>
+      <span className='mr10'>开关：</span>
+      <Switch defaultChecked />
     </>
   );
 };
@@ -68,9 +77,10 @@ const FormTest = () => {
   return (
     <>
       <Card className='card-common'>
-        <div className='commom-h3 mb8'>
+        <h3 className='commom-h3 mb8'>
+          <em className='decorative-block'></em>
           <span>React表单元素</span>
-        </div>
+        </h3>
         <div className='antd-test'>
           <div>
             <AntdSelect></AntdSelect>
@@ -80,6 +90,9 @@ const FormTest = () => {
           </div>
           <div>
             <AntdInput></AntdInput>
+          </div>
+          <div>
+            <AntdSwitch></AntdSwitch>
           </div>
         </div>
       </Card>
