@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Select, Input, Switch, Card } from 'antd';
+import { Select, Input, Switch, Rate, DatePicker, Space, Card } from 'antd';
 const { Option } = Select;
 
 const selectOptions = [
@@ -25,6 +25,7 @@ const selectOptions = [
   }
 ];
 
+// 单选
 const AntdSelect = () => {
   return (
     <>
@@ -40,6 +41,7 @@ const AntdSelect = () => {
   );
 };
 
+// 多选
 const AntdMultiSelect = () => {
   return (
     <>
@@ -55,6 +57,7 @@ const AntdMultiSelect = () => {
   );
 };
 
+// 输入框
 const AntdInput = () => {
   return (
     <>
@@ -64,11 +67,34 @@ const AntdInput = () => {
   );
 };
 
+// 开关
 const AntdSwitch = () => {
   return (
     <>
       <span className='mr10'>开关：</span>
       <Switch defaultChecked />
+    </>
+  );
+};
+
+// 评分
+const AntdRate = () => {
+  return (
+    <>
+      <span className='mr10'>评分：</span>
+      <Rate />
+    </>
+  );
+};
+
+// 日期
+const AntdDatePicker = () => {
+  return (
+    <>
+      <span className='mr10'>日期：</span>
+      <Space direction='vertical'>
+        <DatePicker />
+      </Space>
     </>
   );
 };
@@ -93,6 +119,12 @@ const FormTest = () => {
           </div>
           <div>
             <AntdSwitch></AntdSwitch>
+          </div>
+          <div>
+            <AntdRate></AntdRate>
+          </div>
+          <div>
+            <AntdDatePicker></AntdDatePicker>
           </div>
         </div>
       </Card>
