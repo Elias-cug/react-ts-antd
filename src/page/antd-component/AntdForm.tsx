@@ -99,7 +99,7 @@ const AntdDatePicker = () => {
   );
 };
 
-const FormTest = () => {
+const FormSelect = () => {
   return (
     <>
       <Card className='card-common'>
@@ -132,4 +132,4 @@ const FormTest = () => {
   );
 };
 
-export default FormTest;
+export default FormSelect;

@@ -1,6 +1,7 @@
 import DataAccess from '@/page/data-access';
 import DataStandardization from '@/page/data-standardization';
-import { FormTest } from '@/page/antd-test';
+import { AntdForm } from '@/page/antd-component';
+import { CugForm } from '@/page/cug-component';
 const layoutRouter = [
   {
     path: '/integration',
@@ -21,13 +22,25 @@ const layoutRouter = [
     ]
   },
   {
-    path: '/test',
+    path: '/test-antd-component',
     meta: { title: 'antd组件测试', icon: '' },
     children: [
       {
-        path: '/test/ant-form',
+        path: '/test-antd-component/ant-form',
         isExact: true,
-        component: FormTest,
+        component: AntdForm,
+        meta: { title: '表单组件', icon: '' }
+      }
+    ]
+  },
+  {
+    path: '/test-cug-component',
+    meta: { title: 'cug组件测试', icon: '' },
+    children: [
+      {
+        path: '/test-cug/cug-form',
+        isExact: true,
+        component: CugForm,
         meta: { title: '表单组件', icon: '' }
       }
     ]
