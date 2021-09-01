@@ -37,7 +37,29 @@ const MenuAside: FC = () => {
   return (
     <div className='menu-aside'>
       <Menu mode='inline' theme='dark'>
-        <SubMenuList router={layoutRouter}></SubMenuList>
+        {layoutRouter.map(item => {
+          if (item.children && item.children.length > 0) {
+            return (
+              <SubMenu key={item.path} title={item.meta.title}>
+                {item.children.map(item => {
+                  return (
+                    <Menu.Item key={item.path}>
+                      <Link to={item.path}>{item.meta.title}</Link>
+                    </Menu.Item>
+                  );
+                })}
+              </SubMenu>
+            );
+          } else {
+            return (
+              <Menu.Item key={item.path}>
+                <Link to={item.path}>{item.meta.title}</Link>
+              </Menu.Item>
+            );
+          }
+        })}
+
+        {/* <SubMenuList router={layoutRouter}></SubMenuList> */}
       </Menu>
     </div>
   );
