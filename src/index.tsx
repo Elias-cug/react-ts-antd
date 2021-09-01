@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Routes from "./router/index";
-import './assets/css/index.css'
+import Routes from './router/index';
+import './assets/css/index.css';
+import './assets/css/common.less';
 
 import { Provider } from 'react-redux';
 import reducer from './redux/reducers/index';
-import { createStore} from 'redux'
+import { createStore } from 'redux';
 
 const store = createStore(reducer);
 

@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Select, Input } from 'antd';
+import { Select, Input, Card } from 'antd';
 const { Option } = Select;
 
 const selectOptions = [
@@ -66,17 +66,24 @@ const AntdInput = () => {
 
 const FormTest = () => {
   return (
-    <div className='antd-test'>
-      <div>
-        <AntdSelect></AntdSelect>
-      </div>
-      <div>
-        <AntdMultiSelect></AntdMultiSelect>
-      </div>
-      <div>
-        <AntdInput></AntdInput>
-      </div>
-    </div>
+    <>
+      <Card className='card-common'>
+        <div className='commom-h3 mb8'>
+          <span>React表单元素</span>
+        </div>
+        <div className='antd-test'>
+          <div>
+            <AntdSelect></AntdSelect>
+          </div>
+          <div>
+            <AntdMultiSelect></AntdMultiSelect>
+          </div>
+          <div>
+            <AntdInput></AntdInput>
+          </div>
+        </div>
+      </Card>
+    </>
   );
 };
 
