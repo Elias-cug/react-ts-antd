@@ -4,6 +4,7 @@ import { Card } from 'antd';
 function CugMultiSelect () {
   return (
     <>
+      <span className='mr10'>多选: </span>
       <div></div>
     </>
   );
