@@ -35,7 +35,7 @@ const layoutRouter = [
   },
   {
     path: '/test-cug-component',
-    meta: { title: 'cug组件测试', icon: '' },
+    meta: { title: '自定义组件测试', icon: '' },
     children: [
       {
         path: '/test-cug/cug-form',

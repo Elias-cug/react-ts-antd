@@ -26,11 +26,11 @@ const selectOptions = [
 ];
 
 // 单选
-const AntdSelect = () => {
+function AntdSelect () {
   return (
     <>
       <span className='mr10'>单选: </span>
-      <Select className='form-item' defaultValue='tiannana'>
+      <Select className='form-item' defaultValue='liyisheng'>
         {selectOptions.map(item => (
           <Option key={item.id} value={item.id}>
             {item.text}
@@ -39,14 +39,14 @@ const AntdSelect = () => {
       </Select>
     </>
   );
-};
+}
 
 // 多选
-const AntdMultiSelect = () => {
+function AntdMultiSelect () {
   return (
     <>
       <span className='mr10'>多选: </span>
-      <Select className='form-item' defaultValue={['tiannana']} mode='multiple'>
+      <Select className='form-item' defaultValue={['liyisheng']} mode='multiple'>
         {selectOptions.map(item => (
           <Option key={item.id} value={item.id}>
             {item.text}
@@ -55,17 +55,17 @@ const AntdMultiSelect = () => {
       </Select>
     </>
   );
-};
+}
 
 // 输入框
-const AntdInput = () => {
+function AntdInput () {
   return (
     <>
       <span className='mr10'>输入框：</span>
       <Input className='form-item' placeholder='请输入姓名'></Input>
     </>
   );
-};
+}
 
 // 开关
 const AntdSwitch = () => {
@@ -78,17 +78,17 @@ const AntdSwitch = () => {
 };
 
 // 评分
-const AntdRate = () => {
+function AntdRate () {
   return (
     <>
       <span className='mr10'>评分：</span>
       <Rate />
     </>
   );
-};
+}
 
 // 日期
-const AntdDatePicker = () => {
+function AntdDatePicker () {
   return (
     <>
       <span className='mr10'>日期：</span>
@@ -97,7 +97,7 @@ const AntdDatePicker = () => {
       </Space>
     </>
   );
-};
+}
 
 const FormSelect = () => {
   return (
@@ -107,7 +107,7 @@ const FormSelect = () => {
           <em className='decorative-block'></em>
           <span>React表单元素</span>
         </h3>
-        <div className='antd-test'>
+        <div className='common-form'>
           <div>
             <AntdSelect></AntdSelect>
           </div>
