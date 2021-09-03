@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Select, Input, Switch, Rate, DatePicker, Space, Card } from 'antd';
-import { useState } from 'react';
 
 const selectOptions = [
   {
@@ -22,6 +21,10 @@ const selectOptions = [
   {
     id: 'zhanghui',
     text: '张慧'
+  },
+  {
+    id: 'chaochang',
+    text: '超长超长超长超长超长超长超长超长超长超长超长超长超长超长超长超长超长超长超长超长超长超长'
   }
 ];
 
@@ -43,7 +46,8 @@ function AntdSelect () {
 
 // 多选
 function AntdMultiSelect () {
-  let [isOpen, setState] = useState(false);
+  let [maxTagCount, setMaxTagCount] = useState<number | 'responsive'>(1);
+
   // 过滤函数
   function filterOption (value, option) {
     if (option.label.includes(value)) {
@@ -51,13 +55,27 @@ function AntdMultiSelect () {
     }
     return false;
   }
-  function tagRender (props) {
-    if (isOpen) {
-      return false;
+
+  // 自定义渲染 tag
+  // function tagRender (props) {
+  //   console.log(props);
+  //   if (isOpen) {
+  //     return false;
+  //   } else {
+  //     return <div>只展示一行</div>;
+  //   }
+  // }
+
+  // 监听展开下拉的回调
+  const onDropdownVisibleChange = function (open: boolean) {
+    if (open) {
+      console.log('打开了');
+      setMaxTagCount(500);
     } else {
-      return <div>只展示一行</div>;
+      console.log('关闭了');
+      setMaxTagCount(1);
     }
-  }
+  };
 
   return (
     <>
@@ -75,24 +93,23 @@ function AntdMultiSelect () {
         // getPopupContainer=<() => document.body> // TODO: 菜单渲染父节点。默认渲染到 body 上，如果你遇到菜单滚动定位问题，试试修改为滚动的区域，并相对其定位
         // listHeight={256} // TODO: 设置弹窗滚动高度
         // loading={false} // TODO:加载中状态
-        // maxTagCount={120} // TODO: 最多显示多少个tag
+        maxTagCount={maxTagCount} // TODO: 最多显示多少个tag
         // maxTagTextLength=<number> // TODO: 最大显示的tag文本长度
         // notFoundContent=<ReactNode> // TODO: 当下拉列表为空时显示的内容
-        // open={false} // TODO: 是否展开下拉
+        // open={isOpen} // TODO: 是否展开下拉
         // options={} // TODO: 数据化配置选项内容，相比 jsx 定义会获得更好的渲染性能
         // placeholder=<string> // TODO: 选择框默认文本
         // searchValue=<string> // TODO: 控制搜索文本
-        // showSearch={false} // TODO: 是否支持搜索
-        tagRender={isOpen ? false : tagRender} // TODO: 自定义tag内容 <(props) => ReactNode>
+        showSearch={true} // TODO: 是否支持搜索
+        // tagRender={isOpen ? null : tagRender} // TODO: 自定义tag内容 <(props) => ReactNode>
         // value=<string | string[] | number | number[] | LabeledValue | LabeledValue[]> // TODO: 指定当前选中的条目，多选时为一个数组。（value 数组引用未变化时，Select 不会更新）
-        // showArrow={true} // TODO: 是否显示小箭头
-
+        showArrow={true} // TODO: 是否显示小箭头
         // 事件
         // onBlur=() => {} // TODO: 失去焦点的回调
         // onChange=(value, Array<option>) => {} // TODO: 选中 option，或 input 的 value 变化时，调用此函数
         // onClear=() => {} // TODO: 清除内容时的回调
         // onDeselect=(value) => {} // TODO: 取消选中时回调
-        // onDropdownVisibleChange=(open)=>{} // TODO: 关闭展开下拉菜单的回调
+        onDropdownVisibleChange={onDropdownVisibleChange} // TODO: 关闭展开下拉菜单的回调
         // onFocus=()=> {} // TODO: 获得焦点时的回调
         // onSearch=() => {} // TODO：文本框变化时回调
         // onSelect=() => {} // TODO：被选中时回调
