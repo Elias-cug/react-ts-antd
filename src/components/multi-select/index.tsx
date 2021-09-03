@@ -60,6 +60,9 @@ const CugMultiSelect: FC<Omit<CugMultiSelectProps, 'mode'>> = props => {
     } else {
       setMaxTagCount(1);
     }
+    if (mergedOptions.onDropdownVisibleChange) {
+      mergedOptions.onDropdownVisibleChange(open);
+    }
   };
 
   // 处理 maxTagCount：实现收起的时候只展示一行
