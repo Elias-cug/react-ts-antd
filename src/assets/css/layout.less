@@ -12,16 +12,27 @@
 }
 
 .header {
-  line-height: 48px;
-  text-align: center;
-  font-size: 22px;
-  font-weight: 700;
-  color: #f5f7fa;
+  position: relative;
   width: 100%;
   min-width: 1263px;
   height: 48px;
-  background-color: #2a3555;
+  background-color: var(--fill-header);
   box-sizing: border-box;
+  text-align: center;
+  .title {
+    line-height: 48px;
+    font-size: 22px;
+    font-weight: 700;
+    color: #f5f7fa;
+  }
+  .theme-change {
+    position: absolute;
+    top: 0;
+    right: 8px;
+    line-height: 48px;
+    text-align: right;
+    color: #007bf0;
+  }
 }
 
 .main-container-wrapper {
@@ -32,7 +43,7 @@
 
 .main-container-wrapper .menu-aside {
   width: 160px;
-  background: #1f2639;
+  background: var(--fill-aside);
   box-sizing: border-box;
   flex-shrink: 0;
   height: 100%;
