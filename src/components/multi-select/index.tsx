@@ -44,11 +44,7 @@ const SuffixIcon: FC = () => {
 };
 
 const ClearIcon: FC = () => {
-  return (
-    <div className='clear-icon-wrap'>
-      <i className='icon-input-close clear-icon'></i>
-    </div>
-  );
+  return <i className='icon-input-close'></i>;
 };
 
 const MaxTagPlaceholder = props => {

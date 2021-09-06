@@ -1,57 +1,64 @@
-.close-select.ant-select-selection-overflow-item {
-  max-width: 150px;
-}
 .br-multi-select {
-  position: relative;
   width: 200px;
+  margin: 30px auto;
+}
+.ant-select {
+  position: relative;
   .ant-select-selector {
-    padding-right: 50px !important;
+    padding-right: 56px !important;
   }
-  .ant-select-clear {
+  .ant-select-arrow {
     top: 14px;
-    right: 28px;
-    opacity: 1;
+    right: 6px;
     width: 16px;
     height: 16px;
-    .clear-icon-wrap {
-      border-radius: 50%;
-      width: 16px;
-      height: 16px;
-      background-color: rgba(0, 204, 217, 0.1);
-      border: 1px solid #00ccd9;
-      .clear-icon {
-        text-align: center;
-        color: #00ccd9;
-        font-size: 15px;
+    font-size: 16px;
+    color: #888;
+    .icon-search {
+      display: none;
+      position: relative;
+      right: 2px;
+      top: -2px;
+    }
+  }
+  .ant-select-clear {
+    top: 16px;
+    right: 32px;
+  }
+  &.ant-select-show-search.ant-select-open {
+    .ant-select-arrow {
+      .icon-select-arrow {
+        display: none;
+      }
+      .icon-search {
+        display: inline-block;
+        position: relative;
+        top: -1px;
       }
     }
   }
-  &.ant-select {
-    .ant-select-arrow {
-      top: 14px;
-      right: 6px;
-      width: 16px;
-      height: 16px;
-      font-size: 16px;
-      color: #888;
-      .icon-search {
-        display: none;
-        position: relative;
-        right: 2px;
-        top: -2px;
-      }
-    }
-    &.ant-select-show-search.ant-select-open {
-      .ant-select-arrow {
-        .icon-select-arrow {
-          display: none;
-        }
-        .icon-search {
-          display: inline-block;
-          position: relative;
-          top: -1px;
-        }
-      }
+}
+
+.ant-select .ant-select-clear {
+  position: absolute;
+  color: #888;
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+  margin-top: -8px;
+  border-radius: 50%;
+  font-size: 14px;
+  border: 1px solid #d9d9d9;
+  opacity: 1 !important;
+  .icon-input-close {
+    position: relative;
+    top: -0.02em;
+  }
+  &:hover {
+    border-color: #00ccd9;
+    background-color: rgba(0, 204, 217, 0.1);
+    .icon-input-close {
+      color: #00ccd9;
     }
   }
 }
