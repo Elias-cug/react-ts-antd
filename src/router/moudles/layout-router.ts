@@ -2,6 +2,7 @@ import DataAccess from '@/page/data-access';
 import DataStandardization from '@/page/data-standardization';
 import { AntdForm } from '@/page/antd-component';
 import { CugForm } from '@/page/cug-component';
+import { Icon } from '@/page/other';
 const layoutRouter = [
   {
     path: '/integration',
@@ -42,6 +43,18 @@ const layoutRouter = [
         isExact: true,
         component: CugForm,
         meta: { title: '表单组件', icon: '' }
+      }
+    ]
+  },
+  {
+    path: '/other',
+    meta: { title: '其他组件', icon: '' },
+    children: [
+      {
+        path: '/other/icon',
+        isExact: true,
+        component: Icon,
+        meta: { title: '图标展示', icon: '' }
       }
     ]
   }
