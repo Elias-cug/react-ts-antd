@@ -1,6 +1,7 @@
 import React, { useState, FC } from 'react';
 import { Select } from 'antd';
 import { SelectProps } from 'antd/lib/index';
+import './style/index.less';
 
 type VT = string | string[] | number | number[];
 interface CugMultiSelectProps extends SelectProps<VT> {
@@ -9,7 +10,8 @@ interface CugMultiSelectProps extends SelectProps<VT> {
 
 const defaultOptions = {
   allowCreate: false,
-  showSearch: false
+  showSearch: false,
+  placeholder: '请选择'
 };
 
 // 合并自定义配置
@@ -31,6 +33,33 @@ function getMode (allowCreate: boolean, showSearch: boolean): 'tags' | 'multiple
   }
   return 'multiple';
 }
+
+const SuffixIcon: FC = () => {
+  return (
+    <>
+      <i className='icon-select-arrow'></i>
+      <i className='icon-search'></i>
+    </>
+  );
+};
+
+const ClearIcon: FC = () => {
+  return (
+    <div className='clear-icon-wrap'>
+      <i className='icon-input-close clear-icon'></i>
+    </div>
+  );
+};
+
+const MaxTagPlaceholder = props => {
+  const len = props?.length;
+  const str = len <= 99 ? '+' + len : '99+';
+  return (
+    <div>
+      <i>{str}</i>
+    </div>
+  );
+};
 
 const CugMultiSelect: FC<Omit<CugMultiSelectProps, 'mode'>> = props => {
   // 合并配置
@@ -59,6 +88,8 @@ const CugMultiSelect: FC<Omit<CugMultiSelectProps, 'mode'>> = props => {
       setMaxTagCount(maxTagCount);
     } else {
       setMaxTagCount(1);
+      console.log('props----');
+      console.log(props);
     }
     if (mergedOptions.onDropdownVisibleChange) {
       mergedOptions.onDropdownVisibleChange(open);
@@ -72,9 +103,15 @@ const CugMultiSelect: FC<Omit<CugMultiSelectProps, 'mode'>> = props => {
     <>
       <Select
         {...mergedOptions}
-        className='form-item'
+        className={`br-multi-select`}
         mode={mode}
+        // value={props?.value || value}
         maxTagCount={maxTagCountState}
+        showArrow={true}
+        allowClear={true}
+        suffixIcon={SuffixIcon}
+        clearIcon={ClearIcon}
+        maxTagPlaceholder={MaxTagPlaceholder}
         onDropdownVisibleChange={onDropdownVisibleChange}
       >
         {children}
