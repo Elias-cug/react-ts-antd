@@ -12,105 +12,183 @@
 
 ## TS 基础
 
+1. 基础类型
+number string boolean array object null undefined
+
+2. enum 枚举
+```ts
+enum Response {
+    No = 0,
+    Yes = 1
+}
+```
+
+3. type & interface
+```ts
+type AjaxMethod = 'GET' | 'POST'
+```
+
+```ts
+interface Family {
+  parent: string; // 表示必填
+  son?: string;  // 表示可选
+  readonly address: string; // 表示只读
+}
+```
+
+4. 联合类型
+```ts
+type name: string | number = 1
+```
+
+5. typeof 获取定义好的类型
+
+```ts
+function toArray(x: number): Array<number> {
+ return [x];
+}
+type Func = typeof toArray; // -> (x: number) => number[
+```
+
+6. keyof ⽤来⼀个对象中的所有 key 值
+
+```ts
+interface Person {
+ name: string;
+ age: number;
+}
+type K1 = keyof Person
+```
+
+
+7. extends 类型继承
+
+```ts
+interface A {
+  name: string;
+}
+interface B extends B {
+  age: number;
+}
+```
+
+8. Paritial<T>
+
+将某个类型的属性全部变为可选项
+
+9. Required<T>
+
+将某个类型的属性全部变为必选项
+
+
 ## TS 进阶
 
 1. type 和 interface 异同
 
+重点：interface 重点描述数据结构，type 描述类型
+
+1.1 都可以描述一个对象或函数
+1.2 都允许使用 extends，两两组合都可以相互 extends
+1.3 有一些只有 type 可以做
+```ts
+// 基本类型别名
+type Name = string
+// 联合类型
+interface Dog {
+ wong();
+}
+interface Cat {
+ miao();
+}
+type Pet = Dog | Cat
+// 具体定义数组每个位置的类型
+type PetList = [Dog, Pet]
+// 当你想获取⼀个变量的类型时，使⽤ typeof
+let div = document.createElement('div');
+type B = typeof div
+```
+
 2. 如何基于一个已有类型，扩展出一个大部分内容相似，但是有部分区别的类型？
+2.1 pick
+```ts
+// 原始类型
+interface TState {
+	name: string;
+	age: number;
+	like: string[];
+}
+// 如果我只想要name和age怎么办，最粗暴的就是直接再定义一个（我之前就是这么搞得）
+interface TSingleState {
+	name: string;
+	age: number;
+}
+// 这样的弊端是什么？就是在Tstate发生改变的时候，TSingleState并不会跟着一起改变，所以应该这么写
+interface TSingleState extends Pick<TState, "name" | "age"> {};
+```
+2.2 Paritial
 
 3. 什么是泛型，泛型怎么使用？
+```ts
+interface Test<T = any> {
+ userId: T;
+}
+type TestA = Test<string>;
+type TestB = Test<number>;
+const a: TestA = {
+ userId: '111',
+};
+const b: TestB = {
+ userId: 2222,
+};
+```
+
+4. 泛型约束
+
+5. const 和 readonly
+
+const 定义变量，readonly 定义属性
 
 ## 原理
 
 ## TS 使用
 
-1. 变量中使用
-
+1. 定义变量及使用
+1.1 数组
 ```ts
-// 基础类型
-const a: string = 'AA' // 可以使用模板字符串
-const b: number = 123
-const c: boolean = false
-
-// 数组
-const arrA: Array<string> = ['a', 'b', 'c']
-const arrB: number[] = [1, 3, 5]
-
-// 元组
-let x: [string, number];
-x = ['hello', 10]; // OK
-x = [10, 'hello']; // Error
-
-// 枚举 注：会有默认值
-enum Color {Red = 1, Green = 3, Blue = 5}
-let c: Color = Color.Green;
-
-// any
-let notSure: any = 'AAA'
-
-// void 函数无返回值
-function fn(): void {
-
-}
-
-// undefined 或 null
-let u: undefined = undefined;
-let n: null = null;
-
-// object 注：object表示非原始类型，也就是除number，string，boolean，symbol，null或undefined之外的类型。
+let arrA: Array<string> = ['a', 'b', 'c']
+let arrB: number[] = [1, 3, 5]
+```
+1.2 对象
+```ts
 interface ObjType {
   name: string;
   age: number;
 }
 const obj: ObjectType = {name: 'Tom', age: 18}
+```
 
-// 函数类型
+1.3 函数
+```ts
 interface SearchFunc {
   (source: string, subString: string): boolean;
 }
+
 let mySearch: SearchFunc;
-mySearch = function(source: string, subString: string) {
+mySearch = function(source: string, subString: string): boolean {
   let result = source.search(subString);
   return result > -1;
 }
 
 let myAdd: (x: number, y: number) => number =
     function(x: number, y: number): number { return x + y; };
-```
 
-2. 函数中使用
-
-```ts
-// 普通函数
-function fn(arg: number): number {
-  const a: number = 123
-  return a
-}
-
-// 函数表达式
-const getCount = function(arg: number): number {
-  const a: number = 123
-  return a
-}
-
-// 箭头函数
-const getCount = (arg: number): number => {
-  const a: number = 123
-  return a
-}
-
-// class
-class Person {
-  constructor(name: string, age: number) {
-    this.name = name
-    this.age = age
-  }
-
-  public readonly name: name;
-
-
+type FuncType = (a: number) => number
+let compare: funcType = (x: number, y: number): boolean => {
+  return  x > y
 }
 ```
+
+1.4 class
 
 ## React 中使用 TS
 
@@ -130,6 +208,7 @@ import React from 'react'
 interface EditorProps {
   detail: string
 }
+// FC是简写
 const Editor: React.FC<props: EditorProps> = (props) => {
   const {detail} = props
   return (<div>{detail}</div>)
