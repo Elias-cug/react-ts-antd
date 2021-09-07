@@ -105,7 +105,7 @@
     "rules": {}
   },
   "lint-staged": {
-    "*.{js,json,vue,html}": ["prettier --write", "npm run lint", "git add"]
+    "*.{js,json,vue,html,ts,tsx}": ["prettier --write", "npm run lint", "git add"]
   },
   "husky": {
     "hooks": {

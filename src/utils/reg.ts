@@ -1,2 +1,2 @@
-a = 'ddd';
+a = 'dddd';
 export default {};
