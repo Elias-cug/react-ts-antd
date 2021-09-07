@@ -7,8 +7,7 @@
     "build": "node scripts/build.js",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "commit": "git cz",
-    "lint": "eslint src --ext .ts,.tsx",
-    "prepare": "husky install"
+    "lint": "eslint src --ext .ts,.tsx"
   },
   "dependencies": {
     "@babel/core": "7.12.3",
@@ -55,6 +54,7 @@
     "commitizen": "^4.2.4",
     "css-loader": "4.3.0",
     "cz-conventional-changelog": "^3.3.0",
+    "cz-customizable": "^6.3.0",
     "eslint": "^7.11.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-config-react-app": "^6.0.0",
@@ -111,6 +111,9 @@
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
+    },
+    "cz-customizable": {
+      "config": "./changelog.config.js"
     }
   }
 }
