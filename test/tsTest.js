@@ -1,5 +1,6 @@
+a = 'fff';
 var obj;
 obj = {
-    addf: 'beijing'
+  addf: 'beijing',
 };
 console.log(obj);
