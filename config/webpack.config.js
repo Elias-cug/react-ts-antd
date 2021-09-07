@@ -76,7 +76,6 @@ module.exports = function (webpackEnv) {
   const isEnvProductionProfile = isEnvProduction && process.argv.includes('--profile');
 
   const env = getClientEnvironment(paths.publicUrlOrPath.slice(0, -1));
-  console.log('logoInfo---env: ', env);
 
   // 热更新
   const shouldUseReactRefresh = env.raw.FAST_REFRESH;
