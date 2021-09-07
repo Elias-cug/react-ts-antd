@@ -1,1 +1,2 @@
-export default {}
+a = 'ddd';
+export default {};
