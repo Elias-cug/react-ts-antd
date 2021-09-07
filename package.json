@@ -89,11 +89,21 @@
     "workbox-webpack-plugin": "5.1.4"
   },
   "browserslist": {
-    "production": [">0.2%", "not dead", "not op_mini all"],
-    "development": ["last 1 chrome version", "last 1 firefox version", "last 1 safari version"]
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   },
   "babel": {
-    "presets": ["react-app"]
+    "presets": [
+      "react-app"
+    ]
   },
   "config": {
     "commitizen": {
@@ -101,11 +111,17 @@
     }
   },
   "commitlint": {
-    "extends": ["@commitlint/config-conventional"],
+    "extends": [
+      "@commitlint/config-conventional"
+    ],
     "rules": {}
   },
   "lint-staged": {
-    "*.{js,json,vue,html,ts,tsx}": ["prettier --write", "npm run lint", "git add"]
+    "*.{js,json,vue,html,ts,tsx}": [
+      "prettier --write",
+      "npm run lint",
+      "git add"
+    ]
   },
   "husky": {
     "hooks": {

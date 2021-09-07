@@ -47,14 +47,11 @@ const ClearIcon: FC = () => {
   return <i className='icon-input-close'></i>;
 };
 
-const MaxTagPlaceholder = props => {
-  const len = props?.length;
-  const str = len <= 99 ? '+' + len : '99+';
-  return (
-    <div>
-      <i>{str}</i>
-    </div>
-  );
+const MaxTagPlaceholder: FC = props => {
+  console.log(props);
+  // const len = props?.length;
+  // const str = len <= 99 ? '+' + len : '99+';
+  return <div>{/* <i>{str}</i> */}</div>;
 };
 
 const CugMultiSelect: FC<Omit<CugMultiSelectProps, 'mode'>> = props => {
