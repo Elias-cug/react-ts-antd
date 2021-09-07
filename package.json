@@ -110,10 +110,7 @@
   },
   "config": {
     "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    },
-    "cz-customizable": {
-      "config": "./changelog.config.js"
+      "path": "node_modules/cz-customizable"
     }
   }
 }
