@@ -31,33 +31,28 @@ const postcssNormalize = require('postcss-normalize');
 
 const appPackageJson = require(paths.appPackageJson);
 
-// Source maps are resource heavy and can cause out of memory issue for large source files.
-// const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false'
-const shouldUseSourceMap = true;
+// 是否需要开启 sourceMap
+const shouldUseSourceMap = process.env.REACT_APP_GENERATE_SOURCEMAP !== 'false';
 
 const webpackDevClientEntry = require.resolve('react-dev-utils/webpackHotDevClient');
 const reactRefreshOverlayEntry = require.resolve('react-dev-utils/refreshOverlayInterop');
 
-// Some apps do not need the benefits of saving a web request, so not inlining the chunk
-// makes for a smoother build process.
-const shouldInlineRuntimeChunk = process.env.INLINE_RUNTIME_CHUNK !== 'false';
+const shouldInlineRuntimeChunk = process.env.REACT_APP_INLINE_RUNTIME_CHUNK !== 'false';
 
-const emitErrorsAsWarnings = process.env.ESLINT_NO_DEV_ERRORS === 'true';
-const disableESLintPlugin = process.env.DISABLE_ESLINT_PLUGIN === 'true';
+const emitErrorsAsWarnings = process.env.REACT_APP_ESLINT_NO_DEV_ERRORS === 'true';
+const disableESLintPlugin = process.env.REACT_APP_DISABLE_ESLINT_PLUGIN === 'true';
 
 const imageInlineSizeLimit = parseInt(process.env.IMAGE_INLINE_SIZE_LIMIT || '10000');
 
-// Check if TypeScript is setup
 const useTypeScript = fs.existsSync(paths.appTsConfig);
 
-// Get the path to the uncompiled service worker (if it exists).
 const swSrc = paths.swSrc;
 
-// style files regexes
+// style --> css
 const cssRegex = /\.css$/;
 const cssModuleRegex = /\.module\.css$/;
-const sassRegex = /\.(scss|sass)$/;
-const sassModuleRegex = /\.module\.(scss|sass)$/;
+
+// style --> less
 const lessRegex = /\.less$/;
 const lessModuleRegex = /\.module\.less$/;
 
@@ -74,8 +69,6 @@ const hasJsxRuntime = (() => {
   }
 })();
 
-// This is the production and development configuration.
-// It is focused on developer experience, fast rebuilds, and a minimal bundle.
 module.exports = function (webpackEnv) {
   const isEnvDevelopment = webpackEnv === 'development';
   const isEnvProduction = webpackEnv === 'production';
@@ -83,7 +76,9 @@ module.exports = function (webpackEnv) {
   const isEnvProductionProfile = isEnvProduction && process.argv.includes('--profile');
 
   const env = getClientEnvironment(paths.publicUrlOrPath.slice(0, -1));
+  console.log('logoInfo---env: ', env);
 
+  // 热更新
   const shouldUseReactRefresh = env.raw.FAST_REFRESH;
 
   const getStyleLoaders = (cssOptions, preProcessor) => {
@@ -137,21 +132,15 @@ module.exports = function (webpackEnv) {
 
   return {
     mode: isEnvProduction ? 'production' : isEnvDevelopment && 'development',
-    // Stop compilation early in production
+    // TODO: bail
     bail: isEnvProduction,
-    devtool: isEnvProduction
-      ? shouldUseSourceMap
-        ? 'source-map'
-        : false
-      : isEnvDevelopment && 'cheap-module-source-map',
+    devtool: isEnvProduction ? (shouldUseSourceMap ? 'source-map' : false) : isEnvDevelopment && 'source-map',
     entry: isEnvDevelopment && !shouldUseReactRefresh ? [webpackDevClientEntry, paths.appIndexJs] : paths.appIndexJs,
     output: {
-      // The build folder.
       path: isEnvProduction ? paths.appBuild : undefined,
       pathinfo: isEnvDevelopment,
       filename: isEnvProduction ? 'static/js/[name].[contenthash:8].js' : isEnvDevelopment && 'static/js/bundle.js',
       futureEmitAssets: true,
-      // There are also additional JS chunk files if you use code splitting.
       chunkFilename: isEnvProduction
         ? 'static/js/[name].[contenthash:8].chunk.js'
         : isEnvDevelopment && 'static/js/[name].chunk.js',
@@ -165,7 +154,6 @@ module.exports = function (webpackEnv) {
     optimization: {
       minimize: isEnvProduction,
       minimizer: [
-        // This is only used in production mode
         new TerserPlugin({
           terserOptions: {
             parse: {
@@ -239,10 +227,10 @@ module.exports = function (webpackEnv) {
     module: {
       strictExportPresence: true,
       rules: [
-        // Disable require.ensure as it's not a standard language feature.
         { parser: { requireEnsure: false } },
         {
           oneOf: [
+            // .avif
             {
               test: [/\.avif$/],
               loader: require.resolve('url-loader'),
@@ -252,6 +240,7 @@ module.exports = function (webpackEnv) {
                 name: 'static/media/[name].[hash:8].[ext]'
               }
             },
+            // 图片等
             {
               test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
               loader: require.resolve('url-loader'),
@@ -260,6 +249,7 @@ module.exports = function (webpackEnv) {
                 name: 'static/media/[name].[hash:8].[ext]'
               }
             },
+            // js|mjs|jsx|ts|tsx
             {
               test: /\.(js|mjs|jsx|ts|tsx)$/,
               include: paths.appSrc,
@@ -274,7 +264,6 @@ module.exports = function (webpackEnv) {
                     }
                   ]
                 ],
-
                 plugins: [
                   [
                     require.resolve('babel-plugin-named-asset-import'),
@@ -293,6 +282,7 @@ module.exports = function (webpackEnv) {
                 compact: isEnvProduction
               }
             },
+            // js|mjs
             {
               test: /\.(js|mjs)$/,
               exclude: /@babel(?:\/|\\{1,2})runtime/,
@@ -308,6 +298,7 @@ module.exports = function (webpackEnv) {
                 inputSourceMap: shouldUseSourceMap
               }
             },
+            // css
             {
               test: cssRegex,
               exclude: cssModuleRegex,
@@ -317,6 +308,7 @@ module.exports = function (webpackEnv) {
               }),
               sideEffects: true
             },
+            // css module
             {
               test: cssModuleRegex,
               use: getStyleLoaders({
@@ -327,32 +319,7 @@ module.exports = function (webpackEnv) {
                 }
               })
             },
-            {
-              test: sassRegex,
-              exclude: sassModuleRegex,
-              use: getStyleLoaders(
-                {
-                  importLoaders: 3,
-                  sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment
-                },
-                'sass-loader'
-              ),
-              sideEffects: true
-            },
-            {
-              test: sassModuleRegex,
-              use: getStyleLoaders(
-                {
-                  importLoaders: 3,
-                  sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment,
-                  modules: {
-                    getLocalIdent: getCSSModuleLocalIdent
-                  }
-                },
-                'sass-loader'
-              )
-            },
-
+            // less
             {
               test: lessRegex,
               exclude: lessModuleRegex,
@@ -365,6 +332,7 @@ module.exports = function (webpackEnv) {
               ),
               sideEffects: true
             },
+            // less module
             {
               test: lessModuleRegex,
               use: getStyleLoaders(
@@ -378,7 +346,7 @@ module.exports = function (webpackEnv) {
                 'less-loader'
               )
             },
-
+            // 其余文件
             {
               loader: require.resolve('file-loader'),
               exclude: [/\.(js|mjs|jsx|ts|tsx)$/, /\.html$/, /\.json$/],
@@ -462,7 +430,6 @@ module.exports = function (webpackEnv) {
           exclude: [/\.map$/, /asset-manifest\.json$/, /LICENSE/],
           maximumFileSizeToCacheInBytes: 5 * 1024 * 1024
         }),
-      // TypeScript type checking
       useTypeScript &&
         new ForkTsCheckerWebpackPlugin({
           typescript: resolve.sync('typescript', {
@@ -474,10 +441,6 @@ module.exports = function (webpackEnv) {
           resolveTypeReferenceDirectiveModule: process.versions.pnp ? `${__dirname}/pnpTs.js` : undefined,
           tsconfig: paths.appTsConfig,
           reportFiles: [
-            // This one is specifically to match during CI tests,
-            // as micromatch doesn't match
-            // '../cra-template-typescript/template/src/App.tsx'
-            // otherwise.
             '../**/src/**/*.{ts,tsx}',
             '**/src/**/*.{ts,tsx}',
             '!**/src/**/__tests__/**',
@@ -486,12 +449,10 @@ module.exports = function (webpackEnv) {
             '!**/src/setupTests.*'
           ],
           silent: true,
-          // The formatter is invoked directly in WebpackDevServerUtils during development
           formatter: isEnvProduction ? typescriptFormatter : undefined
         }),
       !disableESLintPlugin &&
         new ESLintPlugin({
-          // Plugin options
           extensions: ['js', 'mjs', 'jsx', 'ts', 'tsx'],
           formatter: require.resolve('react-dev-utils/eslintFormatter'),
           eslintPath: require.resolve('eslint'),
@@ -499,7 +460,6 @@ module.exports = function (webpackEnv) {
           context: paths.appSrc,
           cache: true,
           cacheLocation: path.resolve(paths.appNodeModules, '.cache/.eslintcache'),
-          // ESLint class options
           cwd: paths.appPath,
           resolvePluginsRelativeTo: __dirname,
           baseConfig: {
