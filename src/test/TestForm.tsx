@@ -1,7 +1,15 @@
-import React from 'react';
+import React, { FC } from 'react';
 import FormCreate from '@/components/HOC/Form';
 
-const TestForm = props => {
+interface FormType {
+  getFiledProps: Function;
+  getFieldFilter: Function;
+}
+interface TestFormProp {
+  form: FormType;
+}
+
+const TestForm: FC<TestFormProp> = props => {
   return (
     <div>
       <input

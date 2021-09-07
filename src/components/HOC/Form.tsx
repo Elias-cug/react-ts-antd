@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import AsyncValidator from 'async-validator';
 export default function FormCreate () {
   const store = {};

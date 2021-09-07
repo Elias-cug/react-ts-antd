@@ -6,7 +6,8 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
-    "commit": "git cz"
+    "commit": "git cz",
+    "lint": "eslint src --ext .ts,.tsx"
   },
   "dependencies": {
     "@babel/core": "7.12.3",
@@ -89,21 +90,11 @@
     "workbox-webpack-plugin": "5.1.4"
   },
   "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "production": [">0.2%", "not dead", "not op_mini all"],
+    "development": ["last 1 chrome version", "last 1 firefox version", "last 1 safari version"]
   },
   "babel": {
-    "presets": [
-      "react-app"
-    ]
+    "presets": ["react-app"]
   },
   "config": {
     "commitizen": {
@@ -111,17 +102,11 @@
     }
   },
   "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ],
+    "extends": ["@commitlint/config-conventional"],
     "rules": {}
   },
   "lint-staged": {
-    "*.{js,json,vue,html,ts,tsx}": [
-      "prettier --write",
-      "npm run lint",
-      "git add"
-    ]
+    "*.{js,json,vue,html,ts,tsx}": ["prettier --write", "npm run lint", "git add"]
   },
   "husky": {
     "hooks": {

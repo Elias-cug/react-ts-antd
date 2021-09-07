@@ -7,3 +7,5 @@ const CheckboxOption: FC = () => {
     </>
   );
 };
+
+export default CheckboxOption;
