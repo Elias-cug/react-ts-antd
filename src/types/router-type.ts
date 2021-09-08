@@ -7,7 +7,7 @@ interface Meta {
 export interface RouteType {
   path: string;
   isExact?: boolean;
-  component?: React.ReactNode;
-  meta?: Meta;
+  component?: any;
+  meta: Meta;
   children?: RouteType[];
 }
