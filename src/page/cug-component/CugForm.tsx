@@ -1,6 +1,5 @@
-import React, { useState, FC } from 'react';
-import { Card, Select, Checkbox } from 'antd';
-import { SelectProps } from 'antd/lib/index';
+import React, { FC } from 'react';
+import { Card, Select } from 'antd';
 import CugMultiSelected from '@/components/multi-select/index';
 
 const brFontNames = [
@@ -30,8 +29,7 @@ const brFontNames = [
   }
 ];
 
-export default function CugForm () {
-  // 过滤函数
+const CugForm: FC = () => {
   const filterOption = function (value, option) {
     if (option.label.includes(value)) {
       return true;
@@ -66,4 +64,6 @@ export default function CugForm () {
       </Card>
     </>
   );
-}
+};
+
+export default CugForm;

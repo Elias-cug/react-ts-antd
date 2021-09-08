@@ -1,8 +1,6 @@
-import React from 'react'
-const RoleManage = () => {
-  return (
-    <div>角色管理</div>
-  )
-}
+import React, { FC } from 'react';
+const RoleManage: FC = () => {
+  return <div>角色管理</div>;
+};
 
-export default RoleManage
+export default RoleManage;

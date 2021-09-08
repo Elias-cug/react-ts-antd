@@ -1,11 +1,7 @@
-import React from "react";
+import React, { FC } from 'react';
 
-function DataStandardization() {
-  return (
-    <div>
-      数据标准化
-    </div>
-  )
-}
+const DataStandardization: FC = () => {
+  return <div>数据标准化</div>;
+};
 
-export default DataStandardization
+export default DataStandardization;

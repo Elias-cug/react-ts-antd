@@ -1,8 +1,6 @@
-import React from 'react'
-const Login = () => {
-  return (
-    <a href="/integration/data-access">登录页面</a>
-  )
-}
+import React, { FC } from 'react';
+const Login: FC = () => {
+  return <a href='/integration/data-access'>登录页面</a>;
+};
 
-export default Login
+export default Login;

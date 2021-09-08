@@ -1,8 +1,6 @@
-import React from 'react'
-const UserManage = () => {
-  return (
-    <div>用户管理</div>
-  )
-}
+import React, { FC } from 'react';
+const UserManage: FC = () => {
+  return <div>用户管理</div>;
+};
 
-export default UserManage
+export default UserManage;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, FC } from 'react';
 import { Select, Input, Switch, Rate, DatePicker, Space, Card } from 'antd';
 
 const selectOptions = [
@@ -29,7 +29,7 @@ const selectOptions = [
 ];
 
 // 单选
-function AntdSelect () {
+const AntdSelect: FC = () => {
   return (
     <>
       <span className='mr10'>单选: </span>
@@ -42,10 +42,10 @@ function AntdSelect () {
       </Select>
     </>
   );
-}
+};
 
 // 多选
-function AntdMultiSelect () {
+const AntdMultiSelect: FC = () => {
   let [maxTagCount, setMaxTagCount] = useState<number | 'responsive'>(1);
 
   // 过滤函数
@@ -67,7 +67,7 @@ function AntdMultiSelect () {
   // }
 
   // 监听展开下拉的回调
-  const onDropdownVisibleChange = function (open: boolean) {
+  const onDropdownVisibleChange = function (open: boolean): void {
     if (open) {
       console.log('打开了');
       setMaxTagCount(500);
@@ -149,20 +149,20 @@ function AntdMultiSelect () {
       </Select>
     </>
   );
-}
+};
 
 // 输入框
-function AntdInput () {
+const AntdInput: FC = () => {
   return (
     <>
       <span className='mr10'>输入框：</span>
       <Input className='form-item' placeholder='请输入姓名'></Input>
     </>
   );
-}
+};
 
 // 开关
-const AntdSwitch = () => {
+const AntdSwitch: FC = () => {
   return (
     <>
       <span className='mr10'>开关：</span>
@@ -172,17 +172,17 @@ const AntdSwitch = () => {
 };
 
 // 评分
-function AntdRate () {
+const AntdRate: FC = () => {
   return (
     <>
       <span className='mr10'>评分：</span>
       <Rate />
     </>
   );
-}
+};
 
 // 日期
-function AntdDatePicker () {
+const AntdDatePicker: FC = () => {
   return (
     <>
       <span className='mr10'>日期：</span>
@@ -191,9 +191,9 @@ function AntdDatePicker () {
       </Space>
     </>
   );
-}
+};
 
-const FormSelect = () => {
+const FormSelect: FC = () => {
   return (
     <>
       <Card className='card-common'>

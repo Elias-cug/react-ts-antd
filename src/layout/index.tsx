@@ -1,12 +1,12 @@
-import React, { ReactNode } from 'react'
-import BrHeader from './br-header'
-import MenuAside from './menu-aside'
+import React, { ReactNode, FC } from 'react';
+import BrHeader from './br-header';
+import MenuAside from './menu-aside';
 
 interface MainLayoutProps {
-  children: ReactNode
+  children: ReactNode;
 }
 
-function MainLayout (props: MainLayoutProps) {
+const MainLayout: FC<MainLayoutProps> = (props: MainLayoutProps) => {
   return (
     <div className='container'>
       <BrHeader></BrHeader>
@@ -15,7 +15,7 @@ function MainLayout (props: MainLayoutProps) {
         <div className='main-content'>{props.children}</div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default MainLayout
+export default MainLayout;

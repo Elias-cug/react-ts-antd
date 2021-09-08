@@ -56,7 +56,7 @@ const MaxTagPlaceholder: FC = props => {
 
 const CugMultiSelect: FC<Omit<CugMultiSelectProps, 'mode'>> = props => {
   // 合并配置
-  let mergedOptions: CugMultiSelectProps = mergeOptions(defaultOptions, props);
+  const mergedOptions: CugMultiSelectProps = mergeOptions(defaultOptions, props);
   console.log('log---合并后的配置：');
   console.log(mergedOptions);
 
@@ -90,7 +90,7 @@ const CugMultiSelect: FC<Omit<CugMultiSelectProps, 'mode'>> = props => {
   };
 
   // 处理 maxTagCount：实现收起的时候只展示一行
-  let [maxTagCountState, setMaxTagCount] = useState<number | 'responsive'>(1);
+  const [maxTagCountState, setMaxTagCount] = useState<number | 'responsive'>(1);
 
   return (
     <>

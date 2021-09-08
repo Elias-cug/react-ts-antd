@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { FC } from 'react';
 
-function Header () {
+const Header: FC = () => {
   let isDefaultTheme = true;
-  function changeTheme () {
+  function changeTheme (): void {
     isDefaultTheme = !isDefaultTheme;
     const html = document.querySelector('html');
     let theme = isDefaultTheme ? '' : 'orange';
@@ -16,6 +16,6 @@ function Header () {
       </div>
     </div>
   );
-}
+};
 
 export default Header;

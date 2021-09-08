@@ -1,2 +1,1 @@
-export const test: string = 'test'
-
+export const test = 'test';

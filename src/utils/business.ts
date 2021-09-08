@@ -1,4 +1,3 @@
 // 存放业务相关
-export const count = () => {
-
-}
+const language = 'zh';
+export { language };
