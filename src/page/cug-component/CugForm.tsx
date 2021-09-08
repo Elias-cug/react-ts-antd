@@ -1,41 +1,50 @@
 import React, { FC } from 'react';
 import { Card, Select } from 'antd';
-import CugMultiSelected from '@/components/multi-select/index';
+import MultiSelected from '@/components/multi-select/index';
+import MultiTreeSelect from '@/components/multi-tree-select';
+// import CheckboxOption from '@/components/multi-select/CheckboxOption';
+import { brFontNames } from '@/api/optionsMock';
 
-const brFontNames = [
-  {
-    id: 'tiannana',
-    text: '田娜娜'
-  },
-  {
-    id: 'hanxiaoyu',
-    text: '韩晓雨'
-  },
-  {
-    id: 'liyisheng',
-    text: '李义升'
-  },
-  {
-    id: 'tanqinglian',
-    text: '谭青廉'
-  },
-  {
-    id: 'zhanghui',
-    text: '张慧'
-  },
-  {
-    id: 'chaochang',
-    text: '超长超长超长超长超长超长超长超长超长超长超长超长超长超长超长超长超长超长超长超长超长超长'
-  }
-];
-
-const CugForm: FC = () => {
+// 多选
+const CugMultiSelected: FC = () => {
   const filterOption = function (value, option) {
     if (option.label.includes(value)) {
       return true;
     }
     return false;
   };
+  return (
+    <>
+      <span className='mr10'>多选: </span>
+      <MultiSelected
+        allowCreate={true}
+        showSearch={true}
+        maxTagCount={500}
+        defaultValue='liyisheng'
+        filterOption={filterOption}
+      >
+        {brFontNames.map(item => (
+          <Select.Option key={item.value} value={item.value} label={item.label}>
+            {item.label}
+          </Select.Option>
+        ))}
+      </MultiSelected>
+    </>
+  );
+};
+
+// 树形多选
+const CugMultiTreeSelect: FC = () => {
+  return (
+    <>
+      <span className='mr10'>多选: </span>
+      <MultiTreeSelect className='form-item' options={brFontNames}></MultiTreeSelect>
+    </>
+  );
+};
+
+// CUG 组件
+const CugForm: FC = () => {
   return (
     <>
       <Card className='card-common'>
@@ -45,20 +54,10 @@ const CugForm: FC = () => {
         </h3>
         <div className='common-form'>
           <div>
-            <span className='mr10'>多选: </span>
-            <CugMultiSelected
-              allowCreate={true}
-              showSearch={true}
-              maxTagCount={500}
-              defaultValue='liyisheng'
-              filterOption={filterOption}
-            >
-              {brFontNames.map(item => (
-                <Select.Option key={item.id} value={item.id} label={item.text}>
-                  {item.text}
-                </Select.Option>
-              ))}
-            </CugMultiSelected>
+            <CugMultiSelected></CugMultiSelected>
+          </div>
+          <div>
+            <CugMultiTreeSelect></CugMultiTreeSelect>
           </div>
         </div>
       </Card>

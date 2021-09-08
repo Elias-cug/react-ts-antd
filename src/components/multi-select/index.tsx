@@ -4,7 +4,7 @@ import { SelectProps } from 'antd/lib/index';
 import './style/index.less';
 
 type VT = string | string[] | number | number[];
-interface CugMultiSelectProps extends SelectProps<VT> {
+interface MultiSelectProps extends SelectProps<VT> {
   allowCreate?: boolean;
 }
 
@@ -15,7 +15,7 @@ const defaultOptions = {
 };
 
 // 合并自定义配置
-function mergeOptions (defaultOptions: CugMultiSelectProps, customOptions: SelectProps<VT>): CugMultiSelectProps {
+function mergeOptions (defaultOptions: MultiSelectProps, customOptions: SelectProps<VT>): MultiSelectProps {
   const mergedOptions = {
     ...defaultOptions,
     ...customOptions
@@ -54,9 +54,9 @@ const MaxTagPlaceholder: FC = props => {
   return <div>{/* <i>{str}</i> */}</div>;
 };
 
-const CugMultiSelect: FC<Omit<CugMultiSelectProps, 'mode'>> = props => {
+const MultiSelect: FC<Omit<MultiSelectProps, 'mode'>> = props => {
   // 合并配置
-  const mergedOptions: CugMultiSelectProps = mergeOptions(defaultOptions, props);
+  const mergedOptions: MultiSelectProps = mergeOptions(defaultOptions, props);
   console.log('log---合并后的配置：');
   console.log(mergedOptions);
 
@@ -98,7 +98,6 @@ const CugMultiSelect: FC<Omit<CugMultiSelectProps, 'mode'>> = props => {
         {...mergedOptions}
         className={`br-multi-select`}
         mode={mode}
-        // value={props?.value || value}
         maxTagCount={maxTagCountState}
         showArrow={true}
         allowClear={true}
@@ -113,4 +112,4 @@ const CugMultiSelect: FC<Omit<CugMultiSelectProps, 'mode'>> = props => {
   );
 };
 
-export default CugMultiSelect;
+export default MultiSelect;
