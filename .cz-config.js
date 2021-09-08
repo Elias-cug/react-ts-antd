@@ -39,7 +39,7 @@ module.exports = {
 
   allowCustomScopes: true,
   allowBreakingChanges: ['feat', 'fix'],
-  skipQuestions: ['body', 'scope'],
+  skipQuestions: ['body', 'scope', 'footer'],
 
   subjectLimit: 100
 };
