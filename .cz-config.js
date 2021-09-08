@@ -2,35 +2,23 @@ module.exports = {
   types: [
     {
       value: 'feat',
-      name: '新功能'
+      name: '✨ 新功能'
     },
     {
       value: 'fix',
-      name: '修复Bug'
+      name: '🐛 修复Bug'
     },
     {
       value: 'docs',
-      name: '文档完善'
+      name: '📖 文档完善'
     },
     {
       value: 'style',
-      name: '样式变更'
+      name: '💄 样式变更'
     },
     {
       value: 'refactor',
-      name: '重构代码'
-    },
-    {
-      value: 'perf',
-      name: '性能优化'
-    },
-    {
-      value: 'test',
-      name: '测试'
-    },
-    {
-      value: 'revert',
-      name: '代码回退'
+      name: '🔧 重构代码'
     }
   ],
   allowTicketNumber: false,
@@ -51,7 +39,7 @@ module.exports = {
 
   allowCustomScopes: true,
   allowBreakingChanges: ['feat', 'fix'],
-  skipQuestions: ['body'],
+  skipQuestions: ['body', 'scope'],
 
   subjectLimit: 100
 };
