@@ -1,3 +1,4 @@
 import Icon from './Icon';
+import Mardown from './markdown';
 
-export { Icon };
+export { Icon, Mardown };

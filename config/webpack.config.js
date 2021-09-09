@@ -345,6 +345,10 @@ module.exports = function (webpackEnv) {
                 'less-loader'
               )
             },
+            {
+              test: /\.md$/,
+              loader: 'raw-loader'
+            },
             // 其余文件
             {
               loader: require.resolve('file-loader'),
