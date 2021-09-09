@@ -14,7 +14,7 @@ const defaultOptions = {
   placeholder: '请选择'
 };
 
-// 合并自定义配置
+/** 合并配置 */
 function mergeOptions (defaultOptions: MultiSelectProps, customOptions: SelectProps<VT>): MultiSelectProps {
   const mergedOptions = {
     ...defaultOptions,
@@ -23,6 +23,7 @@ function mergeOptions (defaultOptions: MultiSelectProps, customOptions: SelectPr
   return mergedOptions;
 }
 
+/** 判断得出 mode 值 */
 function getMode (allowCreate: boolean, showSearch: boolean): 'tags' | 'multiple' {
   if (allowCreate) {
     return 'tags';
@@ -34,6 +35,7 @@ function getMode (allowCreate: boolean, showSearch: boolean): 'tags' | 'multiple
   return 'multiple';
 }
 
+/** 组件：返回自定义后缀图标 */
 const SuffixIcon: FC = () => {
   return (
     <>
@@ -43,17 +45,19 @@ const SuffixIcon: FC = () => {
   );
 };
 
+/** 组件：返回清除图标 */
 const ClearIcon: FC = () => {
   return <i className='icon-input-close'></i>;
 };
 
-const MaxTagPlaceholder: FC = props => {
-  console.log(props);
-  // const len = props?.length;
-  // const str = len <= 99 ? '+' + len : '99+';
-  return <div>{/* <i>{str}</i> */}</div>;
+/** 返回超过最大显示个数时要展示的 ReactNode  */
+const getMaxTagPlaceholder = props => {
+  const len = props?.length;
+  const str = len <= 99 ? '+' + len : '99+';
+  return <div>{<i>{str}</i>}</div>;
 };
 
+/** 最终组件 */
 const MultiSelect: FC<Omit<MultiSelectProps, 'mode'>> = props => {
   // 合并配置
   const mergedOptions: MultiSelectProps = mergeOptions(defaultOptions, props);
@@ -81,8 +85,6 @@ const MultiSelect: FC<Omit<MultiSelectProps, 'mode'>> = props => {
       setMaxTagCount(maxTagCount);
     } else {
       setMaxTagCount(1);
-      console.log('props----');
-      console.log(props);
     }
     if (mergedOptions.onDropdownVisibleChange) {
       mergedOptions.onDropdownVisibleChange(open);
@@ -103,7 +105,7 @@ const MultiSelect: FC<Omit<MultiSelectProps, 'mode'>> = props => {
         allowClear={true}
         suffixIcon={SuffixIcon}
         clearIcon={ClearIcon}
-        maxTagPlaceholder={MaxTagPlaceholder}
+        maxTagPlaceholder={getMaxTagPlaceholder}
         onDropdownVisibleChange={onDropdownVisibleChange}
       >
         {children}
