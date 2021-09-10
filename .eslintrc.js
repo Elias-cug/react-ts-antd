@@ -17,6 +17,7 @@ module.exports = {
   plugins: ['@typescript-eslint'],
   rules: {
     'prefer-const': 'off',
-    'no-var-requires': 'off'
+    'no-var-requires': 'off',
+    'ban-types': 'off'
   }
 };
