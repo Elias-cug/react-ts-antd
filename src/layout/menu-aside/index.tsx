@@ -9,6 +9,8 @@ interface SubMenuListProps {
   router: Array<RouteType>;
 }
 
+const defaultOpenKeys = ['/test-antd-component', '/test-cug-component', '/other'];
+
 const SubMenuList: FC<SubMenuListProps> = (props: SubMenuListProps) => {
   console.log('渲染了SubMenuList');
   return (
@@ -36,7 +38,7 @@ const MenuAside: FC = () => {
   console.log('渲染了MenuAside');
   return (
     <div className='menu-aside'>
-      <Menu mode='inline' theme='dark'>
+      <Menu mode='inline' theme='dark' defaultOpenKeys={defaultOpenKeys}>
         {layoutRouter.map(item => {
           if (item.children && item.children.length > 0) {
             return (

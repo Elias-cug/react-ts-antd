@@ -5,7 +5,7 @@ import instance from '@/axios/axios';
 const Mardown: FC = () => {
   const [currentArticle, setCurrentArticle] = useState('');
   useEffect(() => {
-    instance.get('/text-md.md').then(res => {
+    instance.get('/目录结构说明.md').then(res => {
       console.log(res);
       setCurrentArticle(res.data);
     });
