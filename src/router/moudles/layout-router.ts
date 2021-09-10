@@ -2,7 +2,7 @@ import DataAccess from '@/page/data-access';
 import DataStandardization from '@/page/data-standardization';
 import { AntdForm } from '@/page/antd-component';
 import { CugForm } from '@/page/cug-component';
-import { Icon, Mardown } from '@/page/other';
+import { Icon, Mardown, ReactTest } from '@/page/other';
 const layoutRouter = [
   {
     path: '/integration',
@@ -61,6 +61,12 @@ const layoutRouter = [
         isExact: true,
         component: Mardown,
         meta: { title: 'Markdown', icon: '' }
+      },
+      {
+        path: '/other/react-test',
+        isExact: true,
+        component: ReactTest,
+        meta: { title: 'React功能测试', icon: '' }
       }
     ]
   }
