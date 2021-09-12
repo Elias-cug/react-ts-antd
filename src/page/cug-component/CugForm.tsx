@@ -38,7 +38,7 @@ const CugMultiTreeSelect: FC = () => {
   return (
     <>
       <span className='mr10'>多选: </span>
-      <MultiTreeSelect className='form-item' options={brFontNames}></MultiTreeSelect>
+      <MultiTreeSelect className='form-item' data={brFontNames}></MultiTreeSelect>
     </>
   );
 };
