@@ -1,42 +1,43 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useState, useMemo } from 'react';
 import { TreeSelect } from 'antd';
 import { TreeSelectProps } from 'antd/lib/index';
 import './style/index.less';
-import { getDomSize } from './util';
+import { getDomSize, fillMissValues } from './util';
 
 const omitTypes = [];
 
-const HAS_DELETE_ATTRIBUTES = ['allowCreate'];
-interface optionsType {
-  value: string | number;
-  label: string | number;
-  key?: string | number;
-}
+type OptionType = {
+  [prop: string]: any;
+};
 
-type VT = string | string[] | number | number[];
+type OptionsType = Array<OptionType>;
+
+const HAS_DELETE_ATTRIBUTES = ['allowCreate'];
+
+type VT = string[] | number[];
 interface MultiTreeSelectPropsType extends TreeSelectProps<VT> {
   allowCreate?: boolean;
   className?: string;
-  data?: Array<optionsType>;
+  options: OptionsType;
 }
 
-const defaultOptions = {
+const defaultProps = {
   allowCreate: false,
   showSearch: true,
   placeholder: '请选择',
-  data: []
+  options: []
 };
 
 /** 合并配置 */
-function mergeOptions (
-  defaultOptions: MultiTreeSelectPropsType,
-  customOptions: TreeSelectProps<VT>
+function mergeProps (
+  defaultProps: MultiTreeSelectPropsType,
+  customProps: TreeSelectProps<VT>
 ): MultiTreeSelectPropsType {
-  const mergedOptions = {
-    ...defaultOptions,
-    ...customOptions
+  const _proxyProps = {
+    ...defaultProps,
+    ...customProps
   };
-  return mergedOptions;
+  return _proxyProps;
 }
 
 /** 组件：返回自定义后缀图标 */
@@ -63,17 +64,21 @@ const getMaxTagPlaceholder = props => {
 
 const MultiTreeSelect: FC<MultiTreeSelectPropsType> = (props: MultiTreeSelectPropsType) => {
   // 合并配置
-  const mergedOptions: MultiTreeSelectPropsType = mergeOptions(defaultOptions, props);
+  const _proxyProps: MultiTreeSelectPropsType = mergeProps(defaultProps, props);
   console.log('log---树形多选合并后的配置：');
-  console.log(mergedOptions);
+  console.log(_proxyProps);
 
-  // 处理 maxTagCount：实现收起的时候只展示一行
+  const { options, showSearch, allowCreate, value = [], defaultValue = [] } = _proxyProps;
+
+  const mergedShowSearch = allowCreate ? true : showSearch;
+
   const [maxTagCountState, setMaxTagCount] = useState<number | 'responsive'>(1);
-
   const [isOpen, setIsOpen] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
+  const [mergedValue, setMergedValue] = useState([...value, ...defaultValue]);
 
-  // 监听展开下拉的回调
-  const onDropdownVisibleChange = function (open: boolean) {
+  // 拦截 onDropdownVisibleChange
+  const onInnerDropdownVisibleChange = (open: boolean) => {
     if (open) {
       setMaxTagCount(500);
     } else {
@@ -82,7 +87,38 @@ const MultiTreeSelect: FC<MultiTreeSelectPropsType> = (props: MultiTreeSelectPro
     setIsOpen(open);
   };
 
-  // 计算关闭后 selector 大小，保持关闭后只占一行
+  // 拦截 onSearch
+  const onInnerSearch = (value: string) => {
+    console.log('测试拦截 onInnerSearch:');
+    console.log(value);
+    setSearchValue(value);
+  };
+
+  // 拦截 onSelect
+  const onInnerSelect = (value, option) => {
+    console.log('测试拦截 onInnerSelect:');
+    console.log(value, option);
+  };
+
+  // 拦截 onChange
+  const onInnerChange = (value, option) => {
+    setMergedValue(value);
+    setSearchValue('');
+    console.log('测试拦截 onInnerChange:');
+    console.log(value, option);
+  };
+
+  // 设置过滤函数
+  const filterOption = (inputValue, option) => {
+    // console.log('测试filterOption');
+    // console.log(inputValue, option);
+    if (option.title.includes(inputValue)) {
+      return true;
+    }
+    return false;
+  };
+
+  // Effect: 计算关闭后 selector 大小，保持关闭后只占一行
   useEffect(() => {
     function computeSelectorSize () {
       const eleAntSelector = document.querySelector('.br-multi-tree-select .ant-select-selector');
@@ -104,28 +140,60 @@ const MultiTreeSelect: FC<MultiTreeSelectPropsType> = (props: MultiTreeSelectPro
     computeSelectorSize();
   }, [isOpen]);
 
+  // Memo: 合并 options
+  const mergedOptions = useMemo<OptionsType>(() => {
+    let newOption: OptionsType = [];
+    if (!mergedShowSearch || !allowCreate || !searchValue) {
+      newOption = [...options];
+    }
+
+    newOption = fillMissValues(mergedValue, options);
+
+    return newOption;
+  }, [mergedValue, searchValue, isOpen]);
+
+  // Memo: 获取要展示的 options
+  const displayOptions = useMemo<OptionsType>(() => {
+    if (!mergedShowSearch || !allowCreate || !searchValue) {
+      return [...mergedOptions] as OptionsType;
+    }
+
+    const filteredOptions = [...mergedOptions];
+    if (filteredOptions.every(opt => opt['label'] !== searchValue)) {
+      filteredOptions.unshift({
+        value: searchValue,
+        label: searchValue,
+        key: searchValue
+      });
+    }
+    return filteredOptions;
+  }, [mergedOptions, mergedShowSearch, allowCreate, searchValue]);
+
   // 删除无用的属性
   HAS_DELETE_ATTRIBUTES.forEach(prop => {
-    delete mergedOptions[prop];
+    delete _proxyProps[prop];
   });
-
   return (
     <>
       <TreeSelect
-        {...mergedOptions}
-        className={`${mergedOptions.className} br-multi-tree-select`}
+        {..._proxyProps}
+        className={`${_proxyProps.className} br-multi-tree-select`}
         allowClear
         showArrow
-        maxTagCount={maxTagCountState}
+        treeDefaultExpandAll
+        dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
         clearIcon={ClearIcon}
         suffixIcon={SuffixIcon}
+        maxTagCount={maxTagCountState}
         treeCheckable={true}
-        dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
-        treeDefaultExpandAll
-        onDropdownVisibleChange={onDropdownVisibleChange}
         maxTagPlaceholder={getMaxTagPlaceholder}
+        filterTreeNode={filterOption}
+        onDropdownVisibleChange={onInnerDropdownVisibleChange}
+        onSearch={onInnerSearch}
+        onSelect={onInnerSelect}
+        onChange={onInnerChange}
       >
-        {mergedOptions.data?.map(item => {
+        {displayOptions?.map(item => {
           return <TreeSelect.TreeNode key={item.key || item.value} value={item.value} title={item.label} />;
         })}
       </TreeSelect>
