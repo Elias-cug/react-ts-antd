@@ -4,7 +4,7 @@ import { TreeSelectProps } from 'antd/lib/index';
 import './style/index.less';
 import { getDomSize, fillMissValues } from './util';
 
-const omitTypes = [];
+const omitTypes = ['mode', 'clearIcon', ''];
 
 type OptionType = {
   [prop: string]: any;
@@ -65,10 +65,21 @@ const getMaxTagPlaceholder = props => {
 const MultiTreeSelect: FC<MultiTreeSelectPropsType> = (props: MultiTreeSelectPropsType) => {
   // 合并配置
   const _proxyProps: MultiTreeSelectPropsType = mergeProps(defaultProps, props);
-  console.log('log---树形多选合并后的配置：');
-  console.log(_proxyProps);
+  // console.log('log---树形多选合并后的配置：');
+  // console.log(_proxyProps);
 
-  const { options, showSearch, allowCreate, value = [], defaultValue = [] } = _proxyProps;
+  const {
+    options,
+    showSearch,
+    allowCreate,
+    value = [],
+    defaultValue = [],
+    onSelect,
+    onSearch,
+    onChange,
+    onDeselect,
+    maxTagCount
+  } = _proxyProps;
 
   const mergedShowSearch = allowCreate ? true : showSearch;
 
@@ -80,7 +91,7 @@ const MultiTreeSelect: FC<MultiTreeSelectPropsType> = (props: MultiTreeSelectPro
   // 拦截 onDropdownVisibleChange
   const onInnerDropdownVisibleChange = (open: boolean) => {
     if (open) {
-      setMaxTagCount(500);
+      setMaxTagCount(maxTagCount || 500);
     } else {
       setMaxTagCount(1);
     }
@@ -92,20 +103,30 @@ const MultiTreeSelect: FC<MultiTreeSelectPropsType> = (props: MultiTreeSelectPro
     console.log('测试拦截 onInnerSearch:');
     console.log(value);
     setSearchValue(value);
+    onSearch && onSearch(value);
   };
 
   // 拦截 onSelect
   const onInnerSelect = (value, option) => {
     console.log('测试拦截 onInnerSelect:');
     console.log(value, option);
+    onSelect && onSelect(value, option);
+  };
+
+  // 拦截 onInnerDeselect
+  const onInnerDeselect = (value, option) => {
+    console.log('测试拦截 onInnerDeselect:');
+    console.log(value, option);
+    onDeselect && onDeselect(value, option);
   };
 
   // 拦截 onChange
-  const onInnerChange = (value, option) => {
+  const onInnerChange = (value, label, extra) => {
     setMergedValue(value);
     setSearchValue('');
     console.log('测试拦截 onInnerChange:');
-    console.log(value, option);
+    console.log(value, label, extra);
+    onChange && onChange(value, label, extra);
   };
 
   // 设置过滤函数
@@ -138,7 +159,7 @@ const MultiTreeSelect: FC<MultiTreeSelectPropsType> = (props: MultiTreeSelectPro
       }
     }
     computeSelectorSize();
-  }, [isOpen]);
+  }, [isOpen, mergedValue]);
 
   // Memo: 合并 options
   const mergedOptions = useMemo<OptionsType>(() => {
@@ -146,9 +167,7 @@ const MultiTreeSelect: FC<MultiTreeSelectPropsType> = (props: MultiTreeSelectPro
     if (!mergedShowSearch || !allowCreate || !searchValue) {
       newOption = [...options];
     }
-
     newOption = fillMissValues(mergedValue, options);
-
     return newOption;
   }, [mergedValue, searchValue, isOpen]);
 
@@ -191,10 +210,19 @@ const MultiTreeSelect: FC<MultiTreeSelectPropsType> = (props: MultiTreeSelectPro
         onDropdownVisibleChange={onInnerDropdownVisibleChange}
         onSearch={onInnerSearch}
         onSelect={onInnerSelect}
+        onDeselect={onInnerDeselect}
         onChange={onInnerChange}
       >
         {displayOptions?.map(item => {
-          return <TreeSelect.TreeNode key={item.key || item.value} value={item.value} title={item.label} />;
+          return (
+            <TreeSelect.TreeNode
+              {...item}
+              key={item.key || item.value}
+              value={item.value}
+              title={item.label}
+              disabled={item.disabled}
+            />
+          );
         })}
       </TreeSelect>
     </>

@@ -61,8 +61,8 @@ const getMaxTagPlaceholder = props => {
 const MultiSelect: FC<Omit<MultiSelectProps, 'mode'>> = props => {
   // 合并配置
   const mergedOptions: MultiSelectProps = mergeOptions(defaultOptions, props);
-  console.log('log---合并后的配置：');
-  console.log(mergedOptions);
+  // console.log('log---合并后的配置：');
+  // console.log(mergedOptions);
 
   const { allowCreate = false, showSearch = false, maxTagCount = 500 } = mergedOptions;
 
@@ -103,6 +103,7 @@ const MultiSelect: FC<Omit<MultiSelectProps, 'mode'>> = props => {
         maxTagCount={maxTagCountState}
         showArrow={true}
         allowClear={true}
+        loading={true}
         suffixIcon={SuffixIcon}
         clearIcon={ClearIcon}
         maxTagPlaceholder={getMaxTagPlaceholder}

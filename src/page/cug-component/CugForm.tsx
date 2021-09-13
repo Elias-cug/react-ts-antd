@@ -13,6 +13,10 @@ const CugMultiSelected: FC = () => {
     }
     return false;
   };
+  const onChange = (value, option) => {
+    console.log('--测试多选onChange：');
+    console.log(value, option);
+  };
   return (
     <>
       <span className='mr10'>多选: </span>
@@ -22,6 +26,7 @@ const CugMultiSelected: FC = () => {
         maxTagCount={500}
         defaultValue='liyisheng'
         filterOption={filterOption}
+        onChange={onChange}
       >
         {brFontNames.map(item => (
           <Select.Option key={item.value} value={item.value} label={item.label}>
@@ -35,14 +40,33 @@ const CugMultiSelected: FC = () => {
 
 // 树形多选
 const CugMultiTreeSelect: FC = () => {
+  const onChange = value => {
+    console.log('--测试onchange：', value);
+  };
+  const onSelect = (value, option) => {
+    console.log('--测试onSelect：', value, option);
+  };
+  const onDeselect = (value, option) => {
+    console.log('--测试onDeselect：', value, option);
+  };
+  const onSearch = value => {
+    console.log('--测试onSearch：', value);
+  };
   return (
     <>
-      <span className='mr10'>多选: </span>
+      <span className='mr10'>树多选改造: </span>
       <MultiTreeSelect
         className='form-item'
         options={brFontNames}
+        defaultValue={['liyisheng']}
+        placeholder={'请选择标签'}
         showSearch={true}
-        allowCreate={true}
+        allowCreate={false}
+        maxTagCount={3}
+        onChange={onChange}
+        onSelect={onSelect}
+        onDeselect={onDeselect}
+        onSearch={onSearch}
       ></MultiTreeSelect>
     </>
   );
