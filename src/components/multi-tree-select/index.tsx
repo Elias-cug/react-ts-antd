@@ -4,11 +4,11 @@ import { TreeSelectProps } from 'antd/lib/index';
 import './style/index.less';
 import { getDomSize, fillMissValues } from './util';
 
-const omitTypes = ['mode', 'clearIcon', ''];
+const omitTypes = ['mode', 'clearIcon'];
 
-type OptionType = {
+interface OptionType {
   [prop: string]: any;
-};
+}
 
 type OptionsType = Array<OptionType>;
 
@@ -18,7 +18,7 @@ type VT = string[] | number[];
 interface MultiTreeSelectPropsType extends TreeSelectProps<VT> {
   allowCreate?: boolean;
   className?: string;
-  options: OptionsType;
+  options: Array<OptionType>;
 }
 
 const defaultProps = {
@@ -100,23 +100,17 @@ const MultiTreeSelect: FC<MultiTreeSelectPropsType> = (props: MultiTreeSelectPro
 
   // 拦截 onSearch
   const onInnerSearch = (value: string) => {
-    console.log('测试拦截 onInnerSearch:');
-    console.log(value);
     setSearchValue(value);
     onSearch && onSearch(value);
   };
 
   // 拦截 onSelect
   const onInnerSelect = (value, option) => {
-    console.log('测试拦截 onInnerSelect:');
-    console.log(value, option);
     onSelect && onSelect(value, option);
   };
 
   // 拦截 onInnerDeselect
   const onInnerDeselect = (value, option) => {
-    console.log('测试拦截 onInnerDeselect:');
-    console.log(value, option);
     onDeselect && onDeselect(value, option);
   };
 
@@ -124,19 +118,12 @@ const MultiTreeSelect: FC<MultiTreeSelectPropsType> = (props: MultiTreeSelectPro
   const onInnerChange = (value, label, extra) => {
     setMergedValue(value);
     setSearchValue('');
-    console.log('测试拦截 onInnerChange:');
-    console.log(value, label, extra);
     onChange && onChange(value, label, extra);
   };
 
   // 设置过滤函数
   const filterOption = (inputValue, option) => {
-    // console.log('测试filterOption');
-    // console.log(inputValue, option);
-    if (option.title.includes(inputValue)) {
-      return true;
-    }
-    return false;
+    return option.title.includes(inputValue);
   };
 
   // Effect: 计算关闭后 selector 大小，保持关闭后只占一行

@@ -62,7 +62,6 @@ const CugMultiTreeSelect: FC = () => {
         placeholder={'请选择标签'}
         showSearch={true}
         allowCreate={false}
-        maxTagCount={3}
         onChange={onChange}
         onSelect={onSelect}
         onDeselect={onDeselect}
