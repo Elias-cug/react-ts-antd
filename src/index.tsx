@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Routes from './router/index';
+import intl from 'react-intl-universal';
 import './assets/css/index.less';
 import './assets/icon-font/style.css';
 
