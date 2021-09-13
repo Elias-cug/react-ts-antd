@@ -5,6 +5,8 @@ import MultiTreeSelect from '@/components/multi-tree-select';
 // import CheckboxOption from '@/components/multi-select/CheckboxOption';
 import { brFontNames } from '@/api/optionsMock';
 
+import intl from 'react-intl-universal';
+
 // 多选
 const CugMultiSelected: FC = () => {
   const filterOption = function (value, option) {

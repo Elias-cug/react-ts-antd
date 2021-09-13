@@ -1,3 +1,4 @@
+import intl from 'react-intl-universal';
 import zh from './zh.json';
 import en from './en.json';
 
@@ -6,4 +7,11 @@ const locales = {
   en
 };
 
-export default locales;
+intl.init({
+  currentLocale: 'zh',
+  locales: {
+    ...locales
+  }
+});
+
+export default intl;
