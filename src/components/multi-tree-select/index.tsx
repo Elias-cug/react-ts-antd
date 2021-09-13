@@ -1,9 +1,10 @@
-import React, { FC, useEffect, useState, useMemo, ReactNode, PropsWithChildren } from 'react';
+import React, { FC, useEffect, useState, useMemo } from 'react';
 import { TreeSelect } from 'antd';
 import { TreeSelectProps } from 'antd/lib/index';
 import './style/index.less';
 import { getDomSize, fillMissValues } from './util';
 
+// TODO: 不能传的类型
 const omitTypes = ['mode', 'clearIcon'];
 
 interface OptionType {
