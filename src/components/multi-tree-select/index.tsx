@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState, useMemo } from 'react';
+import React, { FC, useEffect, useState, useMemo, ReactNode, PropsWithChildren } from 'react';
 import { TreeSelect } from 'antd';
 import { TreeSelectProps } from 'antd/lib/index';
 import './style/index.less';
@@ -55,12 +55,15 @@ const ClearIcon: FC = () => {
   return <i className='icon-input-close'></i>;
 };
 
-/** 返回超过最大显示个数时要展示的 ReactNode  */
+/** 组件：返回超过最大显示个数时要展示的 ReactNode  */
 const getMaxTagPlaceholder = props => {
   const len = props?.length;
   const str = len <= 99 ? '+' + len : '99+';
   return <div>{<i>{str}</i>}</div>;
 };
+
+/** 组件：返回无数据 ReactNode */
+const NotFoundContent = <div>无数据了</div>;
 
 const MultiTreeSelect: FC<MultiTreeSelectPropsType> = (props: MultiTreeSelectPropsType) => {
   // 合并配置
@@ -78,7 +81,8 @@ const MultiTreeSelect: FC<MultiTreeSelectPropsType> = (props: MultiTreeSelectPro
     onSearch,
     onChange,
     onDeselect,
-    maxTagCount
+    maxTagCount,
+    loading = false
   } = _proxyProps;
 
   const mergedShowSearch = allowCreate ? true : showSearch;
@@ -119,6 +123,18 @@ const MultiTreeSelect: FC<MultiTreeSelectPropsType> = (props: MultiTreeSelectPro
     setMergedValue(value);
     setSearchValue('');
     onChange && onChange(value, label, extra);
+  };
+
+  // 自定义下拉内容--》解决 loading 态
+  const dropdownRender = Menu => {
+    if (loading) {
+      return (
+        <>
+          <div>loading...</div>{' '}
+        </>
+      );
+    }
+    return Menu;
   };
 
   // 设置过滤函数
@@ -188,8 +204,10 @@ const MultiTreeSelect: FC<MultiTreeSelectPropsType> = (props: MultiTreeSelectPro
         showArrow
         treeDefaultExpandAll
         dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
+        dropdownRender={dropdownRender}
         clearIcon={ClearIcon}
         suffixIcon={SuffixIcon}
+        notFoundContent={NotFoundContent}
         maxTagCount={maxTagCountState}
         treeCheckable={true}
         maxTagPlaceholder={getMaxTagPlaceholder}
