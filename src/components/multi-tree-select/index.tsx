@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState, useMemo } from 'react';
-import { TreeSelect } from 'antd';
+import { TreeSelect, Space, Spin } from 'antd';
 import { TreeSelectProps } from 'antd/lib/index';
 import './style/index.less';
 import { getDomSize, fillMissValues } from './util';
@@ -69,8 +69,6 @@ const NotFoundContent = <div>无数据了</div>;
 const MultiTreeSelect: FC<MultiTreeSelectPropsType> = (props: MultiTreeSelectPropsType) => {
   // 合并配置
   const _proxyProps: MultiTreeSelectPropsType = mergeProps(defaultProps, props);
-  // console.log('log---树形多选合并后的配置：');
-  // console.log(_proxyProps);
 
   const {
     options,
@@ -123,16 +121,55 @@ const MultiTreeSelect: FC<MultiTreeSelectPropsType> = (props: MultiTreeSelectPro
   const onInnerChange = (value, label, extra) => {
     setMergedValue(value);
     setSearchValue('');
+    computeSelectorSize(isOpen);
     onChange && onChange(value, label, extra);
   };
+
+  function computeSelectorSize (isOpen: boolean) {
+    // 可用宽度
+    const $selectOverflow = document.querySelector('.br-multi-tree-select .ant-select-selection-overflow');
+    const selectOverflowWidth = getDomSize($selectOverflow).width;
+
+    // 普通的item
+    const $item = document.querySelector('.br-multi-tree-select .ant-select-selection-item');
+
+    // maxTag item
+    const $maxTagItem = document.querySelector('.br-multi-tree-select .ant-select-selection-overflow-item-rest');
+
+    // search item
+    const $searchItem = document.querySelector('.ant-select-selection-overflow-item-suffix');
+
+    // 关闭且出现 maxTagItem
+    if (!isOpen && $item) {
+      const itemWidth = getDomSize($item).width;
+      const searchItemWidth = getDomSize($searchItem).width;
+      let maxTagItemWidth = 0;
+      if ($maxTagItem) {
+        maxTagItemWidth = getDomSize($maxTagItem).width;
+      }
+      const restWidth = selectOverflowWidth - maxTagItemWidth - searchItemWidth - 20;
+      if (itemWidth >= restWidth) {
+        $item.setAttribute('style', `width: ${restWidth + 'px'}`);
+      }
+    } else if (isOpen && $item && $searchItem) {
+      const itemWidth = getDomSize($item).width;
+      const searchItemWidth = getDomSize($searchItem).width;
+      const restWidth = selectOverflowWidth - searchItemWidth - 20;
+      if (itemWidth >= restWidth) {
+        $item.setAttribute('style', `width: ${restWidth + 'px'}`);
+      } else {
+        $item.setAttribute('style', `max-width: "100%"`);
+      }
+    }
+  }
 
   // 自定义下拉内容--》解决 loading 态
   const dropdownRender = Menu => {
     if (loading) {
       return (
-        <>
-          <div>loading...</div>{' '}
-        </>
+        <div className='br-multi-select-loading'>
+          <Spin></Spin>
+        </div>
       );
     }
     return Menu;
@@ -145,24 +182,7 @@ const MultiTreeSelect: FC<MultiTreeSelectPropsType> = (props: MultiTreeSelectPro
 
   // Effect: 计算关闭后 selector 大小，保持关闭后只占一行
   useEffect(() => {
-    function computeSelectorSize () {
-      const eleAntSelector = document.querySelector('.br-multi-tree-select .ant-select-selector');
-      const eleAntSelectorWidth = getDomSize(eleAntSelector).width;
-      const eleMaxTag = document.querySelector('.br-multi-tree-select .ant-select-selection-overflow-item-rest');
-      const eleItem = document.querySelector('.br-multi-tree-select .ant-select-selection-item');
-      if (eleMaxTag) {
-        const eleMaxTagWidth = getDomSize(eleMaxTag).width;
-        const restWidth = eleAntSelectorWidth - eleMaxTagWidth - 60 - 10;
-        const eleItem = document.querySelector('.br-multi-tree-select .ant-select-selection-item');
-        eleItem?.setAttribute('style', `width: ${restWidth + 'px'}`);
-      } else if (eleItem) {
-        const eleItemWidth = getDomSize(eleItem).width;
-        let restWidth = eleAntSelectorWidth - 60 - 10;
-        restWidth = eleItemWidth < restWidth ? eleItemWidth : restWidth;
-        eleItem?.setAttribute('style', `width: ${restWidth + 'px'}`);
-      }
-    }
-    computeSelectorSize();
+    computeSelectorSize(isOpen);
   }, [isOpen, mergedValue]);
 
   // Memo: 合并 options

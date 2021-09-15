@@ -9,7 +9,6 @@ interface MainLayoutProps {
 const MainLayout: FC<MainLayoutProps> = (props: MainLayoutProps) => {
   return (
     <div className='container'>
-      你好
       <BrHeader></BrHeader>
       <div className='main-container-wrapper'>
         <MenuAside></MenuAside>

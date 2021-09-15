@@ -1,7 +1,7 @@
 const brFontNames = [
   {
     value: 'tiannana',
-    label: '田娜娜',
+    label: '田娜娜娜',
     disabled: false,
     age: 20
   },
@@ -19,14 +19,14 @@ const brFontNames = [
   },
   {
     value: 'tanqinglian',
-    label: '谭青廉',
-    disabled: true,
+    label: '谭青廉练练',
+    disabled: false,
     age: 20
   },
   {
     value: 'zhanghui',
-    label: '张慧',
-    disabled: true,
+    label: '张慧回回回回回',
+    disabled: false,
     age: 20
   },
   {
