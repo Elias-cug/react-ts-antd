@@ -16,15 +16,14 @@
   &.ant-select {
     position: relative;
     height: 32px;
+    font-size: @font-size-base;
     .ant-select-selector {
-      padding: 0 56px 0 8px;
+      padding: 0 56px 2px 8px;
       justify-content: center;
       align-items: center;
       .ant-select-selection-overflow {
         .ant-select-selection-overflow-item {
-          margin-top: 2px;
-          margin-bottom: 2px;
-          margin-right: 8px;
+          margin: 5px 8px 3px 0;
           height: 20px;
           .ant-select-selection-item {
             margin: 0;
@@ -40,6 +39,12 @@
               font-size: 12px;
               line-height: 18px;
             }
+          }
+          .ant-select-selection-search {
+            margin-top: -1px;
+          }
+          &.ant-select-selection-overflow-item-suffix {
+            margin-left: -3px;
           }
         }
       }
@@ -136,6 +141,15 @@
     }
     & .ant-select-tree-treenode:hover {
       background-color: rgba(0, 204, 217, 0.1);
+    }
+  }
+  & .br-multi-select-loading {
+    width: 100%;
+    height: 56px;
+    margin: 16px auto;
+    font-size: 24px;
+    .ant-spin {
+      width: 100%;
     }
   }
 }
