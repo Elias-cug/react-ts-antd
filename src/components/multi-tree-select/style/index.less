@@ -1,11 +1,48 @@
-// 选择器样式
+// 一级：ant-select ant-tree-select form-item br-multi-tree-select ant-select-multiple ant-select-allow-clear ant-select-show-arrow ant-select-show-search
+
+// fontSize
+@font-family: Arial, PingFang SC, Microsoft Yahei;
+@font-size-base: 12px; // 主字号
+@font-size-md: 14px;
+
+// size
+@height-base: 32px;
+
+// space
+@space-margin: 16px;
+@space-min-margin: 8px;
+
 .br-multi-tree-select {
-  width: 200px;
-  margin: 30px auto;
   &.ant-select {
     position: relative;
+    height: 32px;
     .ant-select-selector {
-      padding-right: 56px !important;
+      padding: 0 56px 0 8px;
+      justify-content: center;
+      align-items: center;
+      .ant-select-selection-overflow {
+        .ant-select-selection-overflow-item {
+          margin-top: 2px;
+          margin-bottom: 2px;
+          margin-right: 8px;
+          height: 20px;
+          .ant-select-selection-item {
+            margin: 0;
+            padding-right: 4px;
+            padding-left: 4px;
+            height: 20px;
+            line-height: 20px;
+            .ant-select-selection-item-content {
+              margin-left: 0;
+              line-height: 18px;
+            }
+            .ant-select-selection-item-remove {
+              font-size: 12px;
+              line-height: 18px;
+            }
+          }
+        }
+      }
     }
     .ant-select-arrow {
       top: 14px;
@@ -64,28 +101,41 @@
 }
 
 // 下拉样式
-.ant-select-dropdown {
+.ant-select-dropdown.ant-tree-select-dropdown {
+  padding: 4px 0;
+  font-size: 12px;
   & .ant-select-tree-node-content-wrapper {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
   }
-  & .ant-select-tree-treenode {
-    .ant-select-tree-switcher {
-      width: 2px;
+  & .ant-select-tree-list-holder-inner {
+    & .ant-select-tree-treenode {
+      align-items: center;
+      height: 32px;
+      padding: 0;
+      margin-bottom: 1px;
+      line-height: 32px;
+      .ant-select-tree-switcher {
+        display: none;
+      }
+      .ant-select-tree-checkbox {
+        margin: 2px 8px 2px 8px;
+      }
+      & .ant-select-tree-treenode-checkbox-checked {
+        background-color: none;
+      }
+      .ant-select-tree-node-content-wrapper {
+        padding: 0;
+        transition: none !important;
+      }
+      & .ant-select-tree-node-content-wrapper:hover {
+        transition: none;
+        background-color: rgba(0, 204, 217, 0);
+      }
     }
-  }
-  & .ant-select-tree-treenode:hover {
-    background-color: #00ccd9;
-  }
-  & .ant-select-tree-treenode-checkbox-checked {
-    background-color: none;
-  }
-  .ant-select-tree-node-content-wrapper:hover {
-    background-color: #00ccd9 !important;
-    transition: none;
-  }
-  .ant-select-tree-node-content-wrapper {
-    transition: none !important;
+    & .ant-select-tree-treenode:hover {
+      background-color: rgba(0, 204, 217, 0.1);
+    }
   }
 }
