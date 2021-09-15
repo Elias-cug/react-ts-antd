@@ -12,35 +12,59 @@
 }
 
 .header {
-  position: relative;
+  display: flex;
+  justify-content: space-between;
   width: 100%;
   min-width: 1263px;
   height: 48px;
   background: var(--fill-header);
   box-sizing: border-box;
   text-align: center;
-  .title {
+  .header-left {
+    display: flex;
+    justify-content: center;
+    width: 160px;
+    span {
+      height: 45px;
+      width: 45px;
+      background-repeat: no-repeat;
+      &.hero1 {
+        background-image: url(../img/钢铁侠.svg);
+      }
+      &.hero2 {
+        background-image: url(../img/黑寡妇.svg);
+      }
+      &.hero3 {
+        background-image: url(../img/绿巨人.svg);
+      }
+    }
+  }
+  .header-title {
     line-height: 48px;
     font-size: 22px;
     font-weight: 700;
     color: #f5f7fa;
   }
-  .theme-change {
-    position: absolute;
-    top: 0;
-    right: 8px;
+  .header-right {
+    display: flex;
+    justify-content: flex-end;
+    width: 200px;
     line-height: 48px;
-    text-align: right;
-    color: #007bf0;
+    .portrait {
+      display: block;
+      height: 45px;
+      width: 45px;
+      background-repeat: no-repeat;
+      background-size: 100%;
+      background-image: url(../img/portiart.svg);
+    }
   }
 }
-
 .main-container-wrapper {
   height: calc(100% - 48px);
   display: flex;
   flex: 1;
 }
-
 .main-container-wrapper .menu-aside {
   width: 160px;
   background: var(--fill-aside);
@@ -48,7 +72,6 @@
   flex-shrink: 0;
   height: 100%;
 }
-
 .main-container-wrapper .main-content {
   width: 100%;
   height: 100%;

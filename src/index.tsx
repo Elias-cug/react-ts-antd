@@ -4,6 +4,7 @@ import Routes from './router/index';
 import './assets/css/index.less';
 import './assets/icon-font/style.css';
 
+import '@/locales/locales';
 import { Provider } from 'react-redux';
 import reducer from './redux/reducers/index';
 import { createStore } from 'redux';
