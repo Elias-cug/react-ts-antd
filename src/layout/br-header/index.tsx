@@ -1,6 +1,10 @@
 import React, { FC } from 'react';
-
+import { changeLang } from '@/redux/slice/userSlice';
+import { useAppSelector, useAppDispatch } from '@/redux/hooks';
+import intl from '@/locales/locales';
 const Header: FC = () => {
+  const lang = useAppSelector(state => state.userInfo.lang);
+  const dispatch = useAppDispatch();
   let isDefaultTheme = true;
   function changeTheme (): void {
     isDefaultTheme = !isDefaultTheme;
@@ -9,8 +13,11 @@ const Header: FC = () => {
     html?.setAttribute('data-theme', theme);
   }
 
-  function changeLang (): void {
-    console.log('...');
+  function onChangeLang (): void {
+    const currentLang = lang === 'zh-cn' ? 'en-us' : 'zh-cn';
+
+    dispatch(changeLang({ lang: currentLang }));
+    intl.determineLocale({ currentLocale: lang });
   }
   return (
     <div className='header'>
@@ -24,10 +31,11 @@ const Header: FC = () => {
         <span className='mr10' onClick={changeTheme}>
           <a>切换皮肤</a>
         </span>
-        <span className='mr10' onClick={changeLang}>
-          <a>切换语言</a>
+        <span className='mr10' onClick={onChangeLang}>
+          <a>{lang}</a>
+          {intl.get('name')}
         </span>
-        <span className='portrait' onClick={changeLang}></span>
+        <span className='portrait'></span>
       </div>
     </div>
   );
