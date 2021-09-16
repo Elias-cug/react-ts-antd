@@ -15,12 +15,14 @@
 .br-multi-tree-select {
   &.ant-select {
     position: relative;
-    height: 32px;
+    width: 100%;
     font-size: @font-size-base;
-    .ant-select-selector {
-      padding: 0 56px 2px 8px;
+    &.ant-select .ant-select-selector {
+      display: flex;
       justify-content: center;
       align-items: center;
+      padding: 0 56px 2px 8px;
+      width: 100%;
       .ant-select-selection-overflow {
         .ant-select-selection-overflow-item {
           margin: 5px 8px 3px 0;
@@ -50,6 +52,7 @@
       }
     }
     .ant-select-arrow {
+      position: absolute;
       top: 14px;
       right: 6px;
       width: 16px;
@@ -64,6 +67,7 @@
       }
     }
     .ant-select-clear {
+      position: absolute;
       top: 16px;
       right: 32px;
     }
@@ -80,7 +84,7 @@
       }
     }
   }
-  & .ant-select .ant-select-clear {
+  &.ant-select .ant-select-clear {
     position: absolute;
     color: #888;
     font-size: 16px;

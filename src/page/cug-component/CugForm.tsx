@@ -20,7 +20,6 @@ const CugMultiTreeSelect: FC = () => {
   };
   return (
     <>
-      <span className='mr10'>树多选改造: </span>
       <MultiTreeSelect
         className='form-item'
         options={brFontNames}
@@ -41,7 +40,7 @@ const CugMultiTreeSelect: FC = () => {
 // CUG 组件
 const CugForm: FC = () => {
   return (
-    <>
+    <div className='cug-component'>
       <Card className='card-common'>
         <h3 className='commom-h3 mb8'>
           <em className='decorative-block'></em>
@@ -49,11 +48,14 @@ const CugForm: FC = () => {
         </h3>
         <div className='common-form'>
           <div>
-            <CugMultiTreeSelect></CugMultiTreeSelect>
+            <span className='label large-label mr10'>树多选改造: </span>
+            <div className='form-item'>
+              <CugMultiTreeSelect></CugMultiTreeSelect>
+            </div>
           </div>
         </div>
       </Card>
-    </>
+    </div>
   );
 };
 
