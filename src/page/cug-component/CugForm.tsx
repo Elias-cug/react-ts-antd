@@ -1,44 +1,8 @@
 import React, { FC } from 'react';
 import { Card, Select } from 'antd';
-import MultiSelected from '@/components/multi-select/index';
 import MultiTreeSelect from '@/components/multi-tree-select';
 // import CheckboxOption from '@/components/multi-select/CheckboxOption';
 import { brFontNames } from '@/api/optionsMock';
-
-import intl from 'react-intl-universal';
-
-// 多选
-const CugMultiSelected: FC = () => {
-  const filterOption = function (value, option) {
-    if (option.label.includes(value)) {
-      return true;
-    }
-    return false;
-  };
-  const onChange = (value, option) => {
-    console.log('--测试多选onChange：');
-    console.log(value, option);
-  };
-  return (
-    <>
-      <span className='mr10'>多选: </span>
-      <MultiSelected
-        allowCreate={true}
-        showSearch={true}
-        maxTagCount={500}
-        defaultValue='liyisheng'
-        filterOption={filterOption}
-        onChange={onChange}
-      >
-        {brFontNames.map(item => (
-          <Select.Option key={item.value} value={item.value} label={item.label}>
-            {item.label}
-          </Select.Option>
-        ))}
-      </MultiSelected>
-    </>
-  );
-};
 
 // 树形多选
 const CugMultiTreeSelect: FC = () => {
@@ -84,9 +48,6 @@ const CugForm: FC = () => {
           <span>自定义表单元素</span>
         </h3>
         <div className='common-form'>
-          <div>
-            <CugMultiSelected></CugMultiSelected>
-          </div>
           <div>
             <CugMultiTreeSelect></CugMultiTreeSelect>
           </div>
