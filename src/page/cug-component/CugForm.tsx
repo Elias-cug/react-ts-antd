@@ -25,7 +25,7 @@ const CugMultiTreeSelect: FC = () => {
         options={brFontNames}
         defaultValue={['liyisheng']}
         placeholder={'请选择标签'}
-        showSearch={true}
+        showSearch={false}
         allowCreate={false}
         loading={false}
         onChange={onChange}

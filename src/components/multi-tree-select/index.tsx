@@ -151,9 +151,14 @@ const MultiTreeSelect: FC<MultiTreeSelectPropsType> = (props: MultiTreeSelectPro
       if (itemWidth >= restWidth) {
         $item.setAttribute('style', `width: ${restWidth + 'px'}`);
       }
-    } else if (isOpen && $item && $searchItem) {
+    } else if (isOpen && $item) {
       const itemWidth = getDomSize($item).width;
-      const searchItemWidth = getDomSize($searchItem).width;
+      let searchItemWidth = 0;
+      if ($searchItem && mergedShowSearch) {
+        searchItemWidth = getDomSize($searchItem).width;
+      } else {
+        $searchItem?.setAttribute('style', `width: ${0}`);
+      }
       const restWidth = selectOverflowWidth - searchItemWidth - 22;
       if (itemWidth >= restWidth) {
         $item.setAttribute('style', `width: ${restWidth + 'px'}`);
