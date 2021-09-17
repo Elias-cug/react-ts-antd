@@ -5,7 +5,7 @@ import {
   decrement,
   increment,
   incrementByAmount,
-  // incrementAsync,
+  incrementAsync,
   incrementIfOdd,
   selectCount
 } from '@/redux/slice/counterSlice';
@@ -17,11 +17,9 @@ interface ChildProps {
 
 // 测试子组件调用父组件 --> 子组件
 const ChildEmit: FC<ChildProps> = (props: ChildProps) => {
-  console.log('child渲染了');
   let [count, setCount] = useState(0);
   const handleChildClick = function () {
     setCount(count + 1);
-    // props.triggerClick(count);
   };
   useEffect(() => {
     props.triggerClick(count);
@@ -32,6 +30,7 @@ const ChildEmit: FC<ChildProps> = (props: ChildProps) => {
     </>
   );
 };
+
 // 测试子组件调用父组件 --> 子组件
 const ParentReceive: FC = () => {
   const [count, setCount] = useState(0);
@@ -46,6 +45,7 @@ const ParentReceive: FC = () => {
   );
 };
 
+// 计数器组件
 const Counter: FC = () => {
   const count = useSelector(selectCount);
   const dispatch = useDispatch();
@@ -73,9 +73,9 @@ const Counter: FC = () => {
         <button className={styles.button} onClick={() => dispatch(incrementByAmount(incrementValue))}>
           Add Amount
         </button>
-        {/* <button className={styles.asyncButton} onClick={() => dispatch(incrementAsync(incrementValue))}>
+        <button className={styles.asyncButton} onClick={() => dispatch(incrementAsync(incrementValue))}>
           Add Async
-        </button> */}
+        </button>
         <button className={styles.button} onClick={() => dispatch(incrementIfOdd(incrementValue))}>
           Add If Odd
         </button>
