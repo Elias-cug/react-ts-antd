@@ -3,19 +3,18 @@ import intl from '@/locales/locales';
 import localStore from 'localStorage';
 import { getRefreshUrl } from '@/utils/business';
 const Header: FC = () => {
-  let isDefaultTheme = true;
   const curLang = localStore.getItem('lang') || 'zh-cn';
+  const curTheme = localStore.getItem('theme') || '';
   function changeTheme (): void {
-    isDefaultTheme = !isDefaultTheme;
+    const theme = curTheme === '' ? 'orange' : '';
     const html = document.querySelector('html');
-    let theme = isDefaultTheme ? '' : 'orange';
     html?.setAttribute('data-theme', theme);
   }
 
   function onChangeLang (): void {
     const lang = curLang === 'zh-cn' ? 'en-us' : 'zh-cn';
-    localStore.setItem('lang', lang);
     const url = getRefreshUrl();
+    localStore.setItem('lang', lang);
     location.href = url;
   }
   return (
