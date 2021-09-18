@@ -2,6 +2,7 @@ import axios from 'axios';
 
 // axios 实例
 const instance = axios.create({
+  baseURL: '/mock',
   timeout: 10000
 });
 
