@@ -4,6 +4,7 @@ import localStore from 'localStorage';
 import { getRefreshUrl } from '@/utils/business';
 const Header: FC = () => {
   let isDefaultTheme = true;
+  const curLang = localStore.getItem('lang') || 'zh-cn';
   function changeTheme (): void {
     isDefaultTheme = !isDefaultTheme;
     const html = document.querySelector('html');
@@ -12,7 +13,6 @@ const Header: FC = () => {
   }
 
   function onChangeLang (): void {
-    const curLang = localStore.getItem('lang') || 'zh-cn';
     const lang = curLang === 'zh-cn' ? 'en-us' : 'zh-cn';
     localStore.setItem('lang', lang);
     const url = getRefreshUrl();
@@ -31,7 +31,7 @@ const Header: FC = () => {
           <a>切换皮肤</a>
         </span>
         <span className='mr10' onClick={onChangeLang}>
-          <a>切换语言</a>
+          <a>{curLang}</a>
         </span>
         <span title={intl.get('name')} className='portrait'></span>
       </div>
