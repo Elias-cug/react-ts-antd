@@ -1,5 +1,7 @@
 import React, { FC } from 'react';
 import intl from '@/locales/locales';
+import localStore from 'localStorage';
+import { getRefreshUrl } from '@/utils/business';
 const Header: FC = () => {
   let isDefaultTheme = true;
   function changeTheme (): void {
@@ -10,7 +12,11 @@ const Header: FC = () => {
   }
 
   function onChangeLang (): void {
-    console.log('object');
+    const curLang = localStore.getItem('lang') || 'zh-cn';
+    const lang = curLang === 'zh-cn' ? 'en-us' : 'zh-cn';
+    localStore.setItem('lang', lang);
+    const url = getRefreshUrl();
+    location.href = url;
   }
   return (
     <div className='header'>
@@ -26,9 +32,8 @@ const Header: FC = () => {
         </span>
         <span className='mr10' onClick={onChangeLang}>
           <a>切换语言</a>
-          {intl.get('name')}
         </span>
-        <span className='portrait'></span>
+        <span title={intl.get('name')} className='portrait'></span>
       </div>
     </div>
   );

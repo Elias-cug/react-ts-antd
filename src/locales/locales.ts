@@ -1,4 +1,5 @@
 import intl from 'react-intl-universal';
+import localStore from 'localStorage';
 require('intl/locale-data/jsonp/en.js');
 require('intl/locale-data/jsonp/zh.js');
 //  国际化语言包，这里是自建的部分
@@ -7,8 +8,12 @@ const locales: any = {
   'zh-cn': require('./zh-cn.json')
 };
 
+const lang = localStore.getItem('lang');
+
+console.log('当前语言：', lang);
+
 intl.init({
-  currentLocale: 'zh-cn',
+  currentLocale: lang || 'zh-cn',
   locales
 });
 
