@@ -15,6 +15,9 @@ const sockPath = process.env.WDS_SOCKET_PATH; // default: '/sockjs-node'
 const sockPort = process.env.WDS_SOCKET_PORT;
 
 module.exports = function (proxy, allowedHost) {
+  debugger;
+  console.log('---proxy');
+  console.log(proxy);
   return {
     disableHostCheck: !proxy || process.env.DANGEROUSLY_DISABLE_HOST_CHECK === 'true',
     compress: true,
@@ -31,18 +34,18 @@ module.exports = function (proxy, allowedHost) {
     publicPath: paths.publicUrlOrPath.slice(0, -1),
     quiet: true,
     watchOptions: {
-      ignored: ignoredFiles(paths.appSrc)
+      ignored: ignoredFiles(paths.appSrc),
     },
     https: getHttpsConfig(),
     host,
     overlay: false,
     historyApiFallback: {
       disableDotRule: true,
-      index: paths.publicUrlOrPath
+      index: paths.publicUrlOrPath,
     },
     public: allowedHost,
     proxy,
-    before (app, server) {
+    before(app, server) {
       app.use(evalSourceMapMiddleware(server));
       app.use(errorOverlayMiddleware());
 
@@ -50,9 +53,9 @@ module.exports = function (proxy, allowedHost) {
         require(paths.proxySetup)(app);
       }
     },
-    after (app) {
+    after(app) {
       app.use(redirectServedPath(paths.publicUrlOrPath));
       app.use(noopServiceWorkerMiddleware(paths.publicUrlOrPath));
-    }
+    },
   };
 };
