@@ -486,6 +486,8 @@ module.exports = function (webpackEnv) {
       net: 'empty',
       tls: 'empty',
       child_process: 'empty',
+      Buffer: false,
+      process: false,
     },
     performance: false,
   };

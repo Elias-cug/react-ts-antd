@@ -13,17 +13,19 @@ require('../config/env');
 const fs = require('fs');
 const chalk = require('react-dev-utils/chalk');
 const webpack = require('webpack');
-const WebpackDevServer = require('webpack-dev-server');
 const clearConsole = require('react-dev-utils/clearConsole');
 const checkRequiredFiles = require('react-dev-utils/checkRequiredFiles');
-const { choosePort, createCompiler, prepareProxy, prepareUrls } = require('react-dev-utils/WebpackDevServerUtils');
+const { choosePort, createCompiler, prepareUrls } = require('react-dev-utils/WebpackDevServerUtils');
 const openBrowser = require('react-dev-utils/openBrowser');
 const semver = require('semver');
 const paths = require('../config/paths');
 const configFactory = require('../config/webpack.config');
-const createDevServerConfig = require('../config/webpackDevServer.config');
 const getClientEnvironment = require('../config/env');
 const react = require(require.resolve('react', { paths: [paths.appPath] }));
+
+// 整理好的
+const serverConfig = require('../config/webpackDevServer.config');
+const WebpackDevServer = require('webpack-dev-server');
 
 const env = getClientEnvironment(paths.publicUrlOrPath.slice(0, -1));
 const useYarn = fs.existsSync(paths.yarnLockFile);
@@ -77,11 +79,7 @@ checkBrowsers(paths.appPath, isInteractive)
       tscCompileOnError,
       webpack,
     });
-    const proxySetting = require(paths.appPackageJson).proxy;
-    const proxyConfig = prepareProxy(proxySetting, paths.appPublic, paths.publicUrlOrPath);
-    const serverConfig = createDevServerConfig(proxyConfig, urls.lanUrlForConfig);
-    debugger;
-    console.log(serverConfig);
+
     const devServer = new WebpackDevServer(compiler, serverConfig);
     devServer.listen(port, HOST, err => {
       if (err) {
