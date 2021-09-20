@@ -1,5 +1,5 @@
 import { CommonRes } from './common-type';
-import { post } from '@/axios/axios';
+import { post, get } from '@/axios/axios';
 
 interface UserInfoType extends CommonRes {
   result?: {
@@ -14,7 +14,7 @@ interface UserInfoType extends CommonRes {
 
 export const getUserInfo = param => {
   return new Promise((resolve, reject) => {
-    post('/user/getUserInfo', (param = {}))
+    get('/user/getUserInfo')
       .then(res => {
         resolve(res);
       })

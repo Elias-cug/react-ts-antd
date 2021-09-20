@@ -80,14 +80,14 @@ checkBrowsers(paths.appPath, isInteractive)
       webpack,
     });
 
-    const devServer = new WebpackDevServer(compiler, serverConfig);
+    const devServer = new WebpackDevServer(serverConfig, compiler);
     devServer.listen(port, HOST, err => {
       if (err) {
         return console.log(err);
       }
-      if (isInteractive) {
-        clearConsole();
-      }
+      // if (isInteractive) {
+      //   clearConsole();
+      // }
 
       if (env.raw.FAST_REFRESH && semver.lt(react.version, '16.10.0')) {
         console.log(chalk.yellow(`Fast Refresh requires React 16.10 or higher. You are using React ${react.version}.`));
