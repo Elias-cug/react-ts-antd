@@ -12,9 +12,9 @@ interface UserInfoType extends CommonRes {
   };
 }
 
-export const getUserInfo = () => {
+export const getUserInfo = param => {
   return new Promise((resolve, reject) => {
-    post('/user/getUserInfo', {})
+    post('/user/getUserInfo', (param = {}))
       .then(res => {
         resolve(res);
       })

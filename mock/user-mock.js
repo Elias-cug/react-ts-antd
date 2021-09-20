@@ -6,11 +6,7 @@ const userInfo = {
   lang: 'zh-cn',
   userRole: 2,
   theme: '',
-  email: 'elias@lee.com'
+  email: 'elias@lee.com',
 };
 
-const getUserInfo = Mock.mock('/user/getUserInfo', userInfo);
-
-module.exports = {
-  getUserInfo
-};
+Mock.mock('http://:3250/mock/user/getUserInfo', 'post', userInfo);

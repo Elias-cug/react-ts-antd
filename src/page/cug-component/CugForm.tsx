@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
-import { Card, Select } from 'antd';
+import { Card, Button } from 'antd';
 import MultiTreeSelect from '@/components/multi-tree-select';
-// import CheckboxOption from '@/components/multi-select/CheckboxOption';
 import { brFontNames } from '@/api/optionsMock';
+import { getUserInfo } from '@/api/user.api';
 
 // 树形多选
 const CugMultiTreeSelect: FC = () => {
@@ -21,7 +21,7 @@ const CugMultiTreeSelect: FC = () => {
   return (
     <>
       <MultiTreeSelect
-        className='form-item'
+        className="form-item"
         options={brFontNames}
         defaultValue={['liyisheng']}
         placeholder={'请选择标签'}
@@ -39,18 +39,30 @@ const CugMultiTreeSelect: FC = () => {
 
 // CUG 组件
 const CugForm: FC = () => {
+  function onGetUserInfo() {
+    getUserInfo({}).then(res => {
+      console.log(res);
+    });
+  }
   return (
-    <div className='cug-component'>
-      <Card className='card-common'>
-        <h3 className='commom-h3 mb8'>
-          <em className='decorative-block'></em>
+    <div className="cug-component">
+      <Card className="card-common">
+        <h3 className="commom-h3 mb8">
+          <em className="decorative-block"></em>
           <span>自定义表单元素</span>
         </h3>
-        <div className='common-form'>
+        <div className="common-form">
           <div>
-            <span className='label large-label mr10'>树多选改造: </span>
-            <div className='form-item'>
+            <span className="label large-label mr10">树多选改造: </span>
+            <div className="form-item">
               <CugMultiTreeSelect></CugMultiTreeSelect>
+            </div>
+          </div>
+
+          <div>
+            <span className="label large-label mr10">按钮: </span>
+            <div className="form-item">
+              <Button onClick={onGetUserInfo}>获取用户信息</Button>
             </div>
           </div>
         </div>
