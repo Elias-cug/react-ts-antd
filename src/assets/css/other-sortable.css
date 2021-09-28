@@ -1,0 +1,24 @@
+.sortable-wrapper {
+  width: 200px;
+  height: 150px;
+  padding: 10px;
+  border: 1px solid pink;
+  overflow: hidden;
+  overflow-y: auto;
+}
+.sortable-wrapper .sortable-item {
+  height: 30px;
+  text-align: center;
+  border: 1px solid grey;
+  border-bottom: none;
+  background: coral;
+}
+.sortable-wrapper .sortable-item:hover {
+  cursor: pointer;
+}
+.helper-class {
+  text-align: center;
+  border: 1px solid grey;
+  border-bottom: none;
+  background: coral;
+}

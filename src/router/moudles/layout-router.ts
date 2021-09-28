@@ -2,7 +2,7 @@ import DataAccess from '@/page/data-access';
 import DataStandardization from '@/page/data-standardization';
 import { AntdForm } from '@/page/antd-component';
 import { CugForm } from '@/page/cug-component';
-import { Icon, BrIcon, Mardown, ReactTest } from '@/page/other';
+import { Icon, BrIcon, Mardown, ReactTest, Sortable } from '@/page/other';
 const layoutRouter = [
   {
     path: '/integration',
@@ -73,6 +73,12 @@ const layoutRouter = [
         isExact: true,
         component: ReactTest,
         meta: { title: 'React功能测试', icon: '' }
+      },
+      {
+        path: '/other/sortable',
+        isExact: true,
+        component: Sortable,
+        meta: { title: '可拖拽组件', icon: '' }
       }
     ]
   }
