@@ -1,44 +1,8 @@
 import React, { FC } from 'react';
-import { Card, Select } from 'antd';
-import MultiSelected from '@/components/multi-select/index';
+import { Card, Button } from 'antd';
 import MultiTreeSelect from '@/components/multi-tree-select';
-// import CheckboxOption from '@/components/multi-select/CheckboxOption';
 import { brFontNames } from '@/api/optionsMock';
-
-import intl from 'react-intl-universal';
-
-// 多选
-const CugMultiSelected: FC = () => {
-  const filterOption = function (value, option) {
-    if (option.label.includes(value)) {
-      return true;
-    }
-    return false;
-  };
-  const onChange = (value, option) => {
-    console.log('--测试多选onChange：');
-    console.log(value, option);
-  };
-  return (
-    <>
-      <span className='mr10'>多选: </span>
-      <MultiSelected
-        allowCreate={true}
-        showSearch={true}
-        maxTagCount={500}
-        defaultValue='liyisheng'
-        filterOption={filterOption}
-        onChange={onChange}
-      >
-        {brFontNames.map(item => (
-          <Select.Option key={item.value} value={item.value} label={item.label}>
-            {item.label}
-          </Select.Option>
-        ))}
-      </MultiSelected>
-    </>
-  );
-};
+import { getUserInfo } from '@/api/user.api';
 
 // 树形多选
 const CugMultiTreeSelect: FC = () => {
@@ -56,13 +20,12 @@ const CugMultiTreeSelect: FC = () => {
   };
   return (
     <>
-      <span className='mr10'>树多选改造: </span>
       <MultiTreeSelect
-        className='form-item'
+        className="form-item"
         options={brFontNames}
         defaultValue={['liyisheng']}
         placeholder={'请选择标签'}
-        showSearch={true}
+        showSearch={false}
         allowCreate={false}
         loading={false}
         onChange={onChange}
@@ -76,23 +39,35 @@ const CugMultiTreeSelect: FC = () => {
 
 // CUG 组件
 const CugForm: FC = () => {
+  function onGetUserInfo() {
+    getUserInfo({}).then(res => {
+      console.log(res);
+    });
+  }
   return (
-    <>
-      <Card className='card-common'>
-        <h3 className='commom-h3 mb8'>
-          <em className='decorative-block'></em>
+    <div className="cug-component">
+      <Card className="card-common">
+        <h3 className="commom-h3 mb8">
+          <em className="decorative-block"></em>
           <span>自定义表单元素</span>
         </h3>
-        <div className='common-form'>
+        <div className="common-form">
           <div>
-            <CugMultiSelected></CugMultiSelected>
+            <span className="label large-label mr10">树多选改造: </span>
+            <div className="form-item">
+              <CugMultiTreeSelect></CugMultiTreeSelect>
+            </div>
           </div>
+
           <div>
-            <CugMultiTreeSelect></CugMultiTreeSelect>
+            <span className="label large-label mr10">按钮: </span>
+            <div className="form-item">
+              <Button onClick={onGetUserInfo}>获取用户信息</Button>
+            </div>
           </div>
         </div>
       </Card>
-    </>
+    </div>
   );
 };
 

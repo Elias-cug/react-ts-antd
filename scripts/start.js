@@ -13,17 +13,19 @@ require('../config/env');
 const fs = require('fs');
 const chalk = require('react-dev-utils/chalk');
 const webpack = require('webpack');
-const WebpackDevServer = require('webpack-dev-server');
 const clearConsole = require('react-dev-utils/clearConsole');
 const checkRequiredFiles = require('react-dev-utils/checkRequiredFiles');
-const { choosePort, createCompiler, prepareProxy, prepareUrls } = require('react-dev-utils/WebpackDevServerUtils');
+const { choosePort, createCompiler, prepareUrls } = require('react-dev-utils/WebpackDevServerUtils');
 const openBrowser = require('react-dev-utils/openBrowser');
 const semver = require('semver');
 const paths = require('../config/paths');
 const configFactory = require('../config/webpack.config');
-const createDevServerConfig = require('../config/webpackDevServer.config');
 const getClientEnvironment = require('../config/env');
 const react = require(require.resolve('react', { paths: [paths.appPath] }));
+
+// 整理好的
+const serverConfig = require('../config/webpackDevServer.config');
+const WebpackDevServer = require('webpack-dev-server');
 
 const env = getClientEnvironment(paths.publicUrlOrPath.slice(0, -1));
 const useYarn = fs.existsSync(paths.yarnLockFile);
@@ -33,7 +35,7 @@ if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
   process.exit(1);
 }
 
-const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 3000;
+const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 3250;
 const HOST = process.env.HOST || '0.0.0.0';
 
 if (process.env.HOST) {
@@ -65,7 +67,7 @@ checkBrowsers(paths.appPath, isInteractive)
     const urls = prepareUrls(protocol, HOST, port, paths.publicUrlOrPath.slice(0, -1));
     const devSocket = {
       warnings: warnings => devServer.sockWrite(devServer.sockets, 'warnings', warnings),
-      errors: errors => devServer.sockWrite(devServer.sockets, 'errors', errors)
+      errors: errors => devServer.sockWrite(devServer.sockets, 'errors', errors),
     };
     const compiler = createCompiler({
       appName,
@@ -75,19 +77,17 @@ checkBrowsers(paths.appPath, isInteractive)
       useYarn,
       useTypeScript,
       tscCompileOnError,
-      webpack
+      webpack,
     });
-    const proxySetting = require(paths.appPackageJson).proxy;
-    const proxyConfig = prepareProxy(proxySetting, paths.appPublic, paths.publicUrlOrPath);
-    const serverConfig = createDevServerConfig(proxyConfig, urls.lanUrlForConfig);
-    const devServer = new WebpackDevServer(compiler, serverConfig);
+
+    const devServer = new WebpackDevServer(serverConfig, compiler);
     devServer.listen(port, HOST, err => {
       if (err) {
         return console.log(err);
       }
-      if (isInteractive) {
-        clearConsole();
-      }
+      // if (isInteractive) {
+      //   clearConsole();
+      // }
 
       if (env.raw.FAST_REFRESH && semver.lt(react.version, '16.10.0')) {
         console.log(chalk.yellow(`Fast Refresh requires React 16.10 or higher. You are using React ${react.version}.`));

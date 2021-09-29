@@ -1,6 +1,4 @@
 {
-  "i18n-ally.localesPaths": [
-    "src/lang"
-  ],
-  "i18n-ally.keystyle": "nested"
+  "react-intl-universal-i18n.configPath": "src/locales",
+  "react-intl-universal-i18n.defaultDefinition": "zh-cn"
 }

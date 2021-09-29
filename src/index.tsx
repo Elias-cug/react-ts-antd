@@ -4,10 +4,11 @@ import Routes from './router/index';
 import './assets/css/index.less';
 import './assets/icon-font/style.css';
 
+import '@/locales/locales';
 import { Provider } from 'react-redux';
-import reducer from './redux/reducers/index';
-import { createStore } from 'redux';
-const store = createStore(reducer);
+import store from './redux/store';
+
+require('../mock/user-mock');
 
 ReactDOM.render(
   <Provider store={store}>
