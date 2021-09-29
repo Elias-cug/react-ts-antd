@@ -111,7 +111,7 @@ const TableTest: FC = () => {
             <em className='decorative-block'></em>
             <span>可拖拽表头table</span>
           </h3>
-          <Table bordered components={components} columns={columnsState} dataSource={data} />;
+          <Table bordered components={components} columns={columnsState} dataSource={data} />
         </Card>
       </div>
     </>

@@ -42,24 +42,16 @@ const Sortable: FC = () => {
     setItems(arrayMoveImmutable(itemsState, oldIndex, newIndex));
   };
   return (
-    <div className='cug-component'>
-      <Card className='card-common'>
-        <h3 className='commom-h3 mb8'>
-          <em className='decorative-block'></em>
-          <span>可拖拽</span>
-        </h3>
-        <div>
-          <SortableList
-            items={itemsState}
-            helperClass='helper-class'
-            onSortEnd={onSortEnd}
-            lockAxis={'y'}
-            hideSortableGhost={false}
-            lockToContainerEdges={true}
-            // lockOffset={['-3px', '-3px']}
-          />
-        </div>
-      </Card>
+    <div>
+      <SortableList
+        items={itemsState}
+        helperClass='helper-class'
+        onSortEnd={onSortEnd}
+        lockAxis={'y'}
+        hideSortableGhost={false}
+        lockToContainerEdges={true}
+        // lockOffset={['-3px', '-3px']}
+      />
     </div>
   );
 };
