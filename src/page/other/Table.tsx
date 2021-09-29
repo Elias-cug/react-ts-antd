@@ -34,12 +34,13 @@ const columns = [
   },
   {
     title: 'Amount',
-    dataIndex: 'amount'
+    dataIndex: 'amount',
+    width: 200
   },
   {
     title: 'Type',
     dataIndex: 'type',
-    width: 100
+    width: 200
   },
   {
     title: 'Note',
@@ -94,7 +95,7 @@ const TableTest: FC = () => {
   }));
   const [columnsState, setColumns] = useState<any>(columnsCopy);
   const handleResize = index => (e, { size }) => {
-    const nextColumns = [...columns];
+    const nextColumns = [...columnsState];
     nextColumns[index] = {
       ...nextColumns[index],
       width: size.width
