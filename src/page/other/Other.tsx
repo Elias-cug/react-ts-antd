@@ -2,9 +2,13 @@ import React, { FC } from 'react';
 import { Card, Input, Button, notification, message } from 'antd';
 import ClipboardJS from 'clipboard';
 import { Sortable } from './index';
-const OtherTest: FC = () => {
-  const clipboard = new ClipboardJS('#btn_clipboard');
 
+let clipboard;
+const OtherTest: FC = () => {
+  if (clipboard) {
+    clipboard.destroy();
+  }
+  clipboard = new ClipboardJS('#btn_clipboard');
   clipboard.on('success', function (e) {
     message.info(`复制成功：${e.text}`);
     e.clearSelection();
