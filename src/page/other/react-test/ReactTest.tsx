@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import { useHistory, Prompt } from 'react-router-dom';
-import { Button, Card, Input } from 'antd';
+import { Button, Card, Input, Popconfirm } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   decrement,
@@ -93,16 +93,43 @@ const RouterUpdate: FC = () => {
     history.goBack();
     console.log('--------------goBack---end');
   }
+  function handlePush () {
+    console.log('--------------handlePush---start');
+    history.push('/test-antd-component/ant-form');
+    console.log('--------------handlePush---end');
+  }
+  function confirm () {
+    console.log('confirm');
+  }
+  function cancel () {
+    console.log('cancel');
+  }
+  useEffect(() => {
+    const beforeunload = window.addEventListener('beforeunload', () => {
+      console.log('页面卸载了');
+    });
+    return beforeunload;
+  }, []);
   return (
     <>
       <Input style={{ width: '200px', marginRight: '20px' }} />
-      <Button onClick={handleBack}>返回</Button>
-      {/* <Prompt
+      <Popconfirm
+        title='Are you sure to delete this task?'
+        onConfirm={confirm}
+        onCancel={cancel}
+        okText='Yes'
+        cancelText='No'
+      >
+        <Button onClick={handleBack}>返回</Button>
+      </Popconfirm>
+
+      <Button onClick={handlePush}>跳转</Button>
+      <Prompt
         when={true}
-        message={() => {
+        message={(localtion, type) => {
           return true;
         }}
-      ></Prompt> */}
+      ></Prompt>
     </>
   );
 };
@@ -110,6 +137,7 @@ const RouterUpdate: FC = () => {
 const ReactTest: FC = () => {
   useEffect(() => {
     const event = window.addEventListener('popstate', () => {
+      console.log('--tmp--log---------popState');
       return false;
     });
     return event;
