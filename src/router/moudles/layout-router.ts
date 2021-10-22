@@ -2,7 +2,7 @@ import DataAccess from '@/page/data-access';
 import DataStandardization from '@/page/data-standardization';
 import { AntdForm } from '@/page/antd-component';
 import { CugForm } from '@/page/cug-component';
-import { Icon, BrIcon, Mardown, ReactTest, Table, OtherTest } from '@/page/other';
+import { Icon, BrIcon, Mardown, ReactTest, Table, OtherTest, CodeEditor } from '@/page/other';
 const layoutRouter = [
   {
     path: '/integration',
@@ -85,6 +85,12 @@ const layoutRouter = [
         isExact: true,
         component: OtherTest,
         meta: { title: '其他组件测试', icon: '' }
+      },
+      {
+        path: '/other/code-editor',
+        isExact: true,
+        component: CodeEditor,
+        meta: { title: '代码编辑器', icon: '' }
       }
     ]
   }
