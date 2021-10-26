@@ -77,7 +77,7 @@ const layoutRouter = [
     ]
   },
   {
-    path: 'react-use',
+    path: '/react-use',
     meta: { title: 'react功能性测试', icon: '' },
     children: [
       {
@@ -89,7 +89,7 @@ const layoutRouter = [
     ]
   },
   {
-    path: 'axios-use',
+    path: '/axios-use',
     meta: { title: 'axios功能性测试', icon: '' },
     children: [
       {
@@ -101,7 +101,7 @@ const layoutRouter = [
     ]
   },
   {
-    path: 'solution-css',
+    path: '/solution-css',
     meta: { title: 'css解决方案', icon: '' },
     children: [
       {
