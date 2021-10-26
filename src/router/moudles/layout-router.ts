@@ -1,8 +1,8 @@
 import { AntdForm, CugForm } from '@/page/component-base';
 import { LineChart } from '@/page/component-chart';
-import { CssCenter } from '@/page/solution-css';
+import { Icon, BrIcon, Mardown, ReactTest, Table, OtherTest, CodeEditor } from '@/page/component-other';
 import { AxiosUse } from '@/page/use-axios';
-import { Icon, BrIcon, Mardown, ReactTest, Table, OtherTest, CodeEditor } from '@/page/other';
+import { CssCenter } from '@/page/solution-css';
 const layoutRouter = [
   {
     path: '/base-component',
