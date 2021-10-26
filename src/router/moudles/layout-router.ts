@@ -1,48 +1,36 @@
-import DataAccess from '@/page/data-access';
-import DataStandardization from '@/page/data-standardization';
-import { AntdForm } from '@/page/antd-component';
-import { CugForm } from '@/page/cug-component';
+import { AntdForm, CugForm } from '@/page/component-base';
+import { LineChart } from '@/page/component-chart';
+import { CssCenter } from '@/page/solution-css';
+import { AxiosUse } from '@/page/use-axios';
 import { Icon, BrIcon, Mardown, ReactTest, Table, OtherTest, CodeEditor } from '@/page/other';
 const layoutRouter = [
   {
-    path: '/integration',
-    meta: { title: '集成', icon: '' },
+    path: '/base-component',
+    meta: { title: '基础组件', icon: '' },
     children: [
       {
-        path: '/integration/data-access',
-        isExact: true,
-        component: DataAccess,
-        meta: { title: '数据接入', icon: '' }
-      },
-      {
-        path: '/integration/data-standardization',
-        isExact: true,
-        component: DataStandardization,
-        meta: { title: '数据标准化', icon: '' }
-      }
-    ]
-  },
-  {
-    path: '/test-antd-component',
-    meta: { title: 'antd组件测试', icon: '' },
-    children: [
-      {
-        path: '/test-antd-component/ant-form',
+        path: '/base-component/ant-form',
         isExact: true,
         component: AntdForm,
-        meta: { title: '表单组件', icon: '' }
+        meta: { title: 'antd表单组件', icon: '' }
+      },
+      {
+        path: '/base-component/cug-form',
+        isExact: true,
+        component: CugForm,
+        meta: { title: '自定义表单组件', icon: '' }
       }
     ]
   },
   {
-    path: '/test-cug-component',
-    meta: { title: '自定义组件测试', icon: '' },
+    path: 'chart-component',
+    meta: { title: '图形化组件', icon: '' },
     children: [
       {
-        path: '/test-cug/cug-form',
+        path: '/chart-component/echart',
         isExact: true,
-        component: CugForm,
-        meta: { title: '表单组件', icon: '' }
+        component: LineChart,
+        meta: { title: 'echart组件', icon: '' }
       }
     ]
   },
@@ -69,12 +57,6 @@ const layoutRouter = [
         meta: { title: 'Markdown', icon: '' }
       },
       {
-        path: '/other/react-test',
-        isExact: true,
-        component: ReactTest,
-        meta: { title: 'React功能测试', icon: '' }
-      },
-      {
         path: '/other/table',
         isExact: true,
         component: Table,
@@ -91,6 +73,42 @@ const layoutRouter = [
         isExact: true,
         component: CodeEditor,
         meta: { title: '代码编辑器', icon: '' }
+      }
+    ]
+  },
+  {
+    path: 'react-use',
+    meta: { title: 'react功能性测试', icon: '' },
+    children: [
+      {
+        path: '/react-use/base',
+        isExact: true,
+        component: ReactTest,
+        meta: { title: 'react功能性测试', icon: '' }
+      }
+    ]
+  },
+  {
+    path: 'axios-use',
+    meta: { title: 'axios功能性测试', icon: '' },
+    children: [
+      {
+        path: '/axios-use/base',
+        isExact: true,
+        component: AxiosUse,
+        meta: { title: 'axios功能性测试', icon: '' }
+      }
+    ]
+  },
+  {
+    path: 'solution-css',
+    meta: { title: 'css解决方案', icon: '' },
+    children: [
+      {
+        path: '/solution-css/base',
+        isExact: true,
+        component: CssCenter,
+        meta: { title: '居中方案', icon: '' }
       }
     ]
   }

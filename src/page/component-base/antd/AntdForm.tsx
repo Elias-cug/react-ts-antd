@@ -96,7 +96,7 @@ const AntdDatePicker: FC = () => {
   );
 };
 
-const FormSelect: FC = () => {
+const AntdForm: FC = () => {
   return (
     <>
       <Card className='card-common'>
@@ -147,4 +147,4 @@ const FormSelect: FC = () => {
   );
 };
 
-export default FormSelect;
+export default AntdForm;
