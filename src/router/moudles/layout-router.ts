@@ -1,7 +1,7 @@
 import { AntdForm, CugForm } from '@/page/component-base';
 import { LineChart } from '@/page/component-chart';
 import { Icon, BrIcon, Mardown, ReactTest, Table, OtherTest, CodeEditor } from '@/page/component-other';
-import { AxiosUse } from '@/page/use-axios';
+import { AxiosSolution } from '@/page/solution-axios';
 import { CssCenter } from '@/page/solution-css';
 const layoutRouter = [
   {
@@ -90,13 +90,13 @@ const layoutRouter = [
   },
   {
     path: '/axios-use',
-    meta: { title: 'axios功能性测试', icon: '' },
+    meta: { title: 'axios常见问题解决方案', icon: '' },
     children: [
       {
         path: '/axios-use/base',
         isExact: true,
-        component: AxiosUse,
-        meta: { title: 'axios功能性测试', icon: '' }
+        component: AxiosSolution,
+        meta: { title: 'axios常见问题解决方案', icon: '' }
       }
     ]
   },

@@ -56,6 +56,7 @@
     "semver": "7.3.2",
     "source-map-explorer": "^2.5.2",
     "typescript": "^4.3.5",
+    "uuid": "^8.3.2",
     "web-vitals": "^1.1.2"
   },
   "devDependencies": {
