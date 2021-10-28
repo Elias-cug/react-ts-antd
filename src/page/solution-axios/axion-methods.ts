@@ -7,14 +7,11 @@ const request = async function (option) {
   assign(headers, {
     'X-Br-Trace-Id': uuidv4()
   });
-  option.headers = headers;
-  console.log(headers);
   const datas = await instance(option);
-  console.log('request...');
-  console.log(datas);
   return datas;
 };
 
+// get 请求
 export const get = async function (url, config) {
   const timestamp = new Date().getTime();
   if (/.*\?.*$/.test(url)) {
@@ -30,6 +27,20 @@ export const get = async function (url, config) {
       config
     )
   );
+  return datas;
+};
 
+// post 请求
+export const post = async function (url, data, config) {
+  const datas = await request(
+    assign(
+      {
+        url,
+        method: 'post',
+        data: data
+      },
+      config
+    )
+  );
   return datas;
 };

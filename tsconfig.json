@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": ["esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -20,6 +20,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["**/*.ts", "**/*.tsx", "mock/user-mock.js", "server/index.js"],
+  "include": ["**/*.ts", "**/*.tsx", "mock/user-mock.js", "server/index.ts"],
   "exclude": ["node_modules"]
 }
