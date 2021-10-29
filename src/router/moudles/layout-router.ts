@@ -1,8 +1,13 @@
 import { AntdForm, CugForm } from '@/page/component-base';
-import { LineChart } from '@/page/component-chart';
+import { BaseChart, TopoChart } from '@/page/component-chart';
 import { Icon, BrIcon, Mardown, ReactTest, Table, OtherTest, CodeEditor } from '@/page/component-other';
 import { AxiosSolution } from '@/page/solution-axios';
 import { CssCenter } from '@/page/solution-css';
+import { AuthoritySolution } from '@/page/solution-authority';
+import FrontMonitor from '@/page/solution-monitor';
+import VirtualEditor from '@/page/solution-virtual-editor';
+import CircultionScroll from '@/page/solution-circultion-scroll';
+
 const layoutRouter = [
   {
     path: '/base-component',
@@ -23,14 +28,20 @@ const layoutRouter = [
     ]
   },
   {
-    path: 'chart-component',
+    path: '/chart-component',
     meta: { title: '图形化组件', icon: '' },
     children: [
       {
-        path: '/chart-component/echart',
+        path: '/chart-component/echart-base',
         isExact: true,
-        component: LineChart,
-        meta: { title: 'echart组件', icon: '' }
+        component: BaseChart,
+        meta: { title: 'echart基础图', icon: '' }
+      },
+      {
+        path: '/chart-component/g6-topo',
+        isExact: true,
+        component: TopoChart,
+        meta: { title: 'g6-拓扑图', icon: '' }
       }
     ]
   },
@@ -111,6 +122,26 @@ const layoutRouter = [
         meta: { title: '居中方案', icon: '' }
       }
     ]
+  },
+  {
+    path: '/solution-monitor',
+    meta: { title: '埋点监控方案', icon: '' },
+    component: FrontMonitor
+  },
+  {
+    path: '/solution-auth',
+    meta: { title: '权限校验方案', icon: '' },
+    component: AuthoritySolution
+  },
+  {
+    path: '/solution-virtual-editor',
+    meta: { title: '可视化编辑器解决方案', icon: '' },
+    component: VirtualEditor
+  },
+  {
+    path: '/solution-circultion-scroll',
+    meta: { title: '无限滚动解决方案', icon: '' },
+    component: CircultionScroll
   }
 ];
 export default layoutRouter;

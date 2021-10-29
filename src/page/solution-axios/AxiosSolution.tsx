@@ -6,7 +6,7 @@ import Title from '@/components/Title';
 const AxiosSolution: FC = () => {
   // 测试同时触发多个请求
   function onTriggerMultiReq () {
-    const arrUrl = ['/getTestAxiosApi', '/getTestAxiosA', '/getTestAxiosB'];
+    const arrUrl = ['/getTestAxiosA', '/getTestAxiosB', '/getTestAxiosC'];
     const arrPromise: any = [];
     arrUrl.forEach(item => {
       const p = new Promise((resolve, reject) => {
@@ -33,7 +33,7 @@ const AxiosSolution: FC = () => {
 
   // 测试限制最大并发请求个数
   function onTriggerLimitReq () {
-    const arrUrl = ['/getTestAxiosApi', '/getTestAxiosA', '/getTestAxiosB', '/getTestAxiosB'];
+    const arrUrl = ['/getTestAxiosA', '/getTestAxiosB', '/getTestAxiosC', '/getTestAxiosD', '/getTestAxiosE'];
     // 发送请求 --》 完成一个请求后立即往数组里面补充一个，直到请求用完 --》 按数组顺序返回请求结果
   }
 

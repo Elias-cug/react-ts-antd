@@ -9,7 +9,7 @@ interface SubMenuListProps {
   router: Array<RouteType>;
 }
 
-const defaultOpenKeys = ['/base-component', '/chart-component', '/other', '/react-use', '/axios-use', '/solution-css'];
+const defaultOpenKeys = ['/react-use', '/axios-use', '/solution-css'];
 
 const SubMenuList: FC<SubMenuListProps> = (props: SubMenuListProps) => {
   console.log('渲染了SubMenuList');

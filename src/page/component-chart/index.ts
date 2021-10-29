@@ -1,3 +1,4 @@
-import LineChart from './echart';
+import BaseChart from './echart/BaseChart';
+import TopoChart from './g6/TopoChart';
 
-export { LineChart };
+export { BaseChart, TopoChart };
