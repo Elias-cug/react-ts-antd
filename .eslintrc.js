@@ -22,5 +22,6 @@ module.exports = {
     'no-debugger': 'off',
     'prefer-reset-params': 'off',
     '@typescript-eslint/no-explicit-any': 'off'
-  }
+  },
+  exclude: ['server']
 };

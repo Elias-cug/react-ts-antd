@@ -20,6 +20,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["**/*.ts", "**/*.tsx", "mock/user-mock.js", "server/index.ts"],
-  "exclude": ["node_modules"]
+  "include": ["**/*.ts", "**/*.tsx", "mock/user-mock.js"],
+  "exclude": ["node_modules", "server"]
 }
