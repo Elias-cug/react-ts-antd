@@ -1,25 +1,15 @@
-## react + ts + antd
+## 使用
 
-### 功能支持
+```ts
+// 安装依赖
+npm install
 
-1. 路由方案
+// 启动前端 监听 3250 端口
+npm run start
 
-2. redux方案
+// 启动 node 服务端 监听 3000 端口
+cd server
+node index.js
+```
 
-3. 登录认证方案
-
-4. axios 封装方案
-
-5. 提交前校验、提交模板校验方案
-
-### 常用组件汇总
-
-1. markdown
-
-2. 图标库
-
-3. 可伸缩列 table
-
-4. 剪切板
-
-5. 可拖拽
+## 支持功能
