@@ -12,7 +12,7 @@ const request = async function (option) {
 };
 
 // get 请求
-export const get = async function (url, config) {
+export const get = async function (url, config?: any) {
   const timestamp = new Date().getTime();
   if (/.*\?.*$/.test(url)) {
     url += '&t=' + timestamp;
