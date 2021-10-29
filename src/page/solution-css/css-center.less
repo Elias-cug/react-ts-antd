@@ -1,0 +1,64 @@
+.blockStyle-mixin() {
+  background: pink;
+  border-radius: 4px;
+}
+@centerWrapHgt: 80px;
+.centerWrap-mixin() {
+  width: 100%;
+  height: @centerWrapHgt;
+  border: 2px dotted #f69c55;
+  border-radius: 6px;
+}
+
+.center-wrap {
+  .centerWrap-mixin();
+}
+
+// 水平居中 - 行内元素
+.center-inline-block {
+  text-align: center;
+}
+
+// 水平居中 - 块级元素
+.center-block {
+  .center-block-child {
+    text-align: center;
+    margin: 0 auto;
+    width: 500px;
+    .blockStyle-mixin();
+  }
+}
+
+// 水平居中 - flex
+.center-flex {
+  display: flex;
+  justify-content: center;
+  div {
+    text-align: center;
+    margin: 0 8px;
+    width: 100px;
+    .blockStyle-mixin();
+  }
+}
+
+// 垂直居中 - 行内 - 单行
+.center-v-single {
+  line-height: @centerWrapHgt;
+}
+
+// 垂直居中 - 行内 - 多行
+.center-table {
+  display: table;
+  .centerWrap-mixin();
+  .center-v-multi {
+    display: table-cell;
+    vertical-align: middle;
+  }
+}
+
+// 垂直居中 - 行内 - flex
+.center-v-flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

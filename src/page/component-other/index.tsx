@@ -5,5 +5,6 @@ import ReactTest from './react-test/ReactTest';
 import Sortable from './Sortable';
 import Table from './Table';
 import OtherTest from './Other';
+import CodeEditor from './CodeEditor';
 
-export { Icon, BrIcon, Mardown, ReactTest, Sortable, Table, OtherTest };
+export { Icon, BrIcon, Mardown, ReactTest, Sortable, Table, OtherTest, CodeEditor };

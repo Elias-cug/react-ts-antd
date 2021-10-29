@@ -3,19 +3,19 @@ module.exports = {
   client: {
     overlay: {
       errors: true,
-      warnings: false,
+      warnings: false
     },
-    progress: true,
+    progress: true
   },
   proxy: {
-    '/mock': {
-      target: 'http://127.0.0.1:3250',
+    '/api': {
+      target: 'http://127.0.0.1:3000',
       logLevel: 'silent',
       secure: false,
       changeOrigin: true,
       ws: true,
-      xfwd: true,
-    },
+      xfwd: true
+    }
   },
   historyApiFallback: true,
   onBeforeSetupMiddleware: function (devServer) {
@@ -26,5 +26,5 @@ module.exports = {
     devServer.app.get('/some/path', function (req, res) {
       res.json({ custom: 'response' });
     });
-  },
+  }
 };

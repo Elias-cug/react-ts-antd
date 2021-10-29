@@ -7,7 +7,7 @@ const Router: FC = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Redirect exact to='/test-antd-component/ant-form' from='/'></Redirect>
+        <Redirect exact to='/axios-use/base' from='/'></Redirect>
         {R.noLayoutRouter.map(item => (
           <Route key={item.path} exact path={item.path} component={item.component}></Route>
         ))}

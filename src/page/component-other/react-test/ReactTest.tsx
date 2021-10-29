@@ -1,5 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
-import { Button, Card } from 'antd';
+import { useHistory, Prompt } from 'react-router-dom';
+import { Button, Card, Input, Popconfirm } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   decrement,
@@ -84,7 +85,64 @@ const Counter: FC = () => {
   );
 };
 
+// 测试组件路由切换拦截
+const RouterUpdate: FC = () => {
+  const history = useHistory();
+  function handleBack () {
+    console.log('--------------goBack---start');
+    history.goBack();
+    console.log('--------------goBack---end');
+  }
+  function handlePush () {
+    console.log('--------------handlePush---start');
+    history.push('/test-antd-component/ant-form');
+    console.log('--------------handlePush---end');
+  }
+  function confirm () {
+    console.log('confirm');
+  }
+  function cancel () {
+    console.log('cancel');
+  }
+  useEffect(() => {
+    const beforeunload = window.addEventListener('beforeunload', () => {
+      console.log('页面卸载了');
+    });
+    return beforeunload;
+  }, []);
+  return (
+    <>
+      <Input style={{ width: '200px', marginRight: '20px' }} />
+      <Popconfirm
+        title='Are you sure to delete this task?'
+        onConfirm={confirm}
+        onCancel={cancel}
+        okText='Yes'
+        cancelText='No'
+      >
+        <Button onClick={handleBack}>返回</Button>
+      </Popconfirm>
+
+      <Button onClick={handlePush}>跳转</Button>
+      <Prompt
+        when={true}
+        message={(localtion, type) => {
+          return true;
+        }}
+      ></Prompt>
+    </>
+  );
+};
+
 const ReactTest: FC = () => {
+  useEffect(() => {
+    const event = window.addEventListener('popstate', () => {
+      console.log('--tmp--log---------popState');
+      return false;
+    });
+    return event;
+  }, []);
+
   return (
     <>
       <Card className='card-common mb10'>
@@ -100,6 +158,13 @@ const ReactTest: FC = () => {
           <span>redux: </span>
         </h3>
         <Counter></Counter>
+      </Card>
+      <Card className='card-common'>
+        <h3 className='commom-h3 mb8'>
+          <em className='decorative-block'></em>
+          <span>测试监听路由离开</span>
+        </h3>
+        <RouterUpdate></RouterUpdate>
       </Card>
     </>
   );
