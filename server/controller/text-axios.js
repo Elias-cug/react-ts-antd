@@ -3,7 +3,7 @@ const response = require('../utils/reponse');
 function mockTestAxiosDs (id) {
   const testData = {
     id: id,
-    type: Math.random() * 10
+    type: Math.ceil(Math.random() * 6)
   };
   return new Promise(resolve => {
     const resTime = Math.random() * 1000 * 5;
@@ -11,11 +11,6 @@ function mockTestAxiosDs (id) {
       resolve(testData);
     }, resTime);
   });
-}
-
-async function getTestAxiosApi (ctx) {
-  const data = await mockTestAxiosDs(0);
-  response(ctx, data);
 }
 
 async function getTestAxiosA (ctx) {
@@ -33,4 +28,26 @@ async function getTestAxiosC (ctx) {
   response(ctx, data);
 }
 
-module.exports = { getTestAxiosApi, getTestAxiosA, getTestAxiosB, getTestAxiosC };
+async function getTestAxiosD (ctx) {
+  const data = await mockTestAxiosDs(4);
+  response(ctx, data);
+}
+
+async function getTestAxiosE (ctx) {
+  const data = await mockTestAxiosDs(5);
+  response(ctx, data);
+}
+
+async function getTestAxiosF (ctx) {
+  const data = await mockTestAxiosDs(6);
+  response(ctx, data);
+}
+
+module.exports = {
+  getTestAxiosA,
+  getTestAxiosB,
+  getTestAxiosC,
+  getTestAxiosD,
+  getTestAxiosE,
+  getTestAxiosF
+};
