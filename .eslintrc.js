@@ -4,15 +4,15 @@ module.exports = {
     node: true,
     browser: true,
     commonjs: true,
-    es6: true
+    es6: true,
   },
   extends: ['eslint:recommended', 'plugin:react/recommended', 'plugin:@typescript-eslint/recommended'],
   parserOptions: {
     ecmaVersion: 7,
     sourceType: 'module',
     ecmaFeatures: {
-      tsx: true
-    }
+      tsx: true,
+    },
   },
   plugins: ['@typescript-eslint'],
   rules: {
@@ -21,7 +21,6 @@ module.exports = {
     'ban-types': 'off',
     'no-debugger': 'off',
     'prefer-reset-params': 'off',
-    '@typescript-eslint/no-explicit-any': 'off'
+    '@typescript-eslint/no-explicit-any': 'off',
   },
-  exclude: ['server']
 };

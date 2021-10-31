@@ -3,7 +3,7 @@ import React, { FC } from 'react';
 const ReactBase: FC = () => {
   return (
     <>
-      <div>react 基础组件使用</div>
+      <div>react 基础使用</div>
     </>
   );
 };

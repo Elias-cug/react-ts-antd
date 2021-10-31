@@ -8,8 +8,8 @@ import {
   incrementByAmount,
   incrementAsync,
   incrementIfOdd,
-  selectCount
-} from '@/redux/slice/counterSlice';
+  selectCount,
+} from '@/redux/common/slice/counterSlice';
 import styles from '@/assets/css/counter.module.css';
 
 interface ChildProps {
@@ -56,18 +56,18 @@ const Counter: FC = () => {
   return (
     <div>
       <div className={styles.row}>
-        <button className={styles.button} aria-label='Decrement value' onClick={() => dispatch(decrement())}>
+        <button className={styles.button} aria-label="Decrement value" onClick={() => dispatch(decrement())}>
           -
         </button>
         <span className={styles.value}>{count}</span>
-        <button className={styles.button} aria-label='Increment value' onClick={() => dispatch(increment())}>
+        <button className={styles.button} aria-label="Increment value" onClick={() => dispatch(increment())}>
           +
         </button>
       </div>
       <div className={styles.row}>
         <input
           className={styles.textbox}
-          aria-label='Set increment amount'
+          aria-label="Set increment amount"
           value={incrementAmount}
           onChange={e => setIncrementAmount(e.target.value)}
         />
@@ -88,20 +88,20 @@ const Counter: FC = () => {
 // 测试组件路由切换拦截
 const RouterUpdate: FC = () => {
   const history = useHistory();
-  function handleBack () {
+  function handleBack() {
     console.log('--------------goBack---start');
     history.goBack();
     console.log('--------------goBack---end');
   }
-  function handlePush () {
+  function handlePush() {
     console.log('--------------handlePush---start');
     history.push('/test-antd-component/ant-form');
     console.log('--------------handlePush---end');
   }
-  function confirm () {
+  function confirm() {
     console.log('confirm');
   }
-  function cancel () {
+  function cancel() {
     console.log('cancel');
   }
   useEffect(() => {
@@ -114,11 +114,11 @@ const RouterUpdate: FC = () => {
     <>
       <Input style={{ width: '200px', marginRight: '20px' }} />
       <Popconfirm
-        title='Are you sure to delete this task?'
+        title="Are you sure to delete this task?"
         onConfirm={confirm}
         onCancel={cancel}
-        okText='Yes'
-        cancelText='No'
+        okText="Yes"
+        cancelText="No"
       >
         <Button onClick={handleBack}>返回</Button>
       </Popconfirm>
@@ -145,23 +145,23 @@ const ReactTest: FC = () => {
 
   return (
     <>
-      <Card className='card-common mb10'>
-        <h3 className='commom-h3 mb8'>
-          <em className='decorative-block'></em>
+      <Card className="card-common mb10">
+        <h3 className="commom-h3 mb8">
+          <em className="decorative-block"></em>
           <span>测试子组件事件触发到父组件: </span>
         </h3>
         <ParentReceive></ParentReceive>
       </Card>
-      <Card className='card-common'>
-        <h3 className='commom-h3 mb8'>
-          <em className='decorative-block'></em>
+      <Card className="card-common">
+        <h3 className="commom-h3 mb8">
+          <em className="decorative-block"></em>
           <span>redux: </span>
         </h3>
         <Counter></Counter>
       </Card>
-      <Card className='card-common'>
-        <h3 className='commom-h3 mb8'>
-          <em className='decorative-block'></em>
+      <Card className="card-common">
+        <h3 className="commom-h3 mb8">
+          <em className="decorative-block"></em>
           <span>测试监听路由离开</span>
         </h3>
         <RouterUpdate></RouterUpdate>

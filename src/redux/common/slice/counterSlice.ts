@@ -3,7 +3,7 @@ import { fetchCount } from '@/api/counterAPI';
 
 const initialState = {
   value: 0,
-  status: 'idle'
+  status: 'idle',
 };
 export const incrementAsync = createAsyncThunk('counter/fetchCount', async (amount: number | undefined) => {
   const response = await fetchCount(amount);
@@ -22,7 +22,7 @@ export const counterSlice = createSlice({
     },
     incrementByAmount: (state, action) => {
       state.value += action.payload;
-    }
+    },
   },
   extraReducers: builder => {
     builder
@@ -33,7 +33,7 @@ export const counterSlice = createSlice({
         state.status = 'idle';
         state.value += action.payload;
       });
-  }
+  },
 });
 
 export const { increment, decrement, incrementByAmount } = counterSlice.actions;
