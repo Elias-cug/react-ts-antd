@@ -7,15 +7,9 @@ import './assets/icon-font/style.css';
 
 import '@/locales/locales';
 import { Provider } from 'react-redux';
+
 // import store from './redux/common/store';
-
-import store from './redux/react-redux-test/store';
-
-const mapStateToProps = state => {
-  return {};
-};
-
-const contanier = connect()(Routes);
+import { store } from './redux/react-redux-test/store';
 
 ReactDOM.render(
   <Provider store={store}>

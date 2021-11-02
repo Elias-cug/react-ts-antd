@@ -1,6 +1,12 @@
-import { createStore } from 'redux';
+import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
+import counterReducer from '@/redux/react-redux-test/reducers/counterReducer';
 
-import reducer from './reducers';
-const store = createStore(reducer);
+export const store = configureStore({
+  reducer: {
+    counter: counterReducer
+  }
+});
 
-export default store;
+export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>;
+export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, Action<string>>;

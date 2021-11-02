@@ -1,9 +1,8 @@
 const initState = {
-  name: 'liyish',
-  age: 18,
-  email: 'liyish@163.com'
+  type: 'info',
+  trace: '00125'
 };
-const userReducer = (state = initState, action: any): any => {
+const logReducer = (state = initState, action: any): any => {
   const type = action.type;
   switch (type) {
     case 'UPDATE': {
@@ -14,4 +13,4 @@ const userReducer = (state = initState, action: any): any => {
   }
 };
 
-export default userReducer;
+export default logReducer;
