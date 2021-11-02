@@ -1,16 +1,28 @@
-const initState = {
-  type: 'info',
-  trace: '00125'
-};
-const logReducer = (state = initState, action: any): any => {
-  const type = action.type;
-  switch (type) {
-    case 'UPDATE': {
-      return { ...state, ...action.payload };
-    }
-    default:
-      return state;
-  }
+import { createSlice } from '@reduxjs/toolkit';
+
+const initialState = {
+  userId: 1,
+  username: 'liyish',
+  email: 'liyish@163.com',
+  phone: '10086',
+  locale: 'zh-cn'
 };
 
-export default logReducer;
+const userSlice = createSlice({
+  name: 'user',
+  initialState,
+  reducers: {
+    updateReducer: (state, action) => {
+      const newInfo = action.payload;
+      Object.keys(newInfo).forEach(item => {
+        state[item] = newInfo[item];
+      });
+    }
+  }
+});
+
+export const selectUser = (state): any => state.user;
+
+export const { updateReducer } = userSlice.actions;
+
+export default userSlice.reducer;
