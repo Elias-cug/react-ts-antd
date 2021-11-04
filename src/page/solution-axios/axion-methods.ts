@@ -1,4 +1,4 @@
-import instance from '@/axios/axios';
+import instance, { CancelToken, isCancel } from './axios-instance';
 import { v4 as uuidv4 } from 'uuid';
 import { assign } from 'lodash';
 
@@ -44,3 +44,5 @@ export const post = async function (url, data, config) {
   );
   return datas;
 };
+
+export { CancelToken, isCancel };

@@ -5,4 +5,11 @@ function response (ctx, data) {
   };
 }
 
-module.exports = response;
+function resError (ctx, data) {
+  ctx.body = {
+    code: 500,
+    result: data
+  };
+}
+
+module.exports = { response, resError };

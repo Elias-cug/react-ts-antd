@@ -9,8 +9,6 @@ const instance = axios.create({
 // 添加请求拦截器
 instance.interceptors.request.use(
   request => {
-    console.log('---request');
-    console.log(request);
     return request;
   },
   error => {

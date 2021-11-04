@@ -5,7 +5,12 @@ const {
   getTestAxiosC,
   getTestAxiosD,
   getTestAxiosE,
-  getTestAxiosF
+  getTestAxiosF,
+
+  getTestAxiosErrorA,
+  getTestAxiosErrorB,
+  getTestAxiosErrorC,
+  getTestAxiosErrorD
 } = require('../../controller/text-axios');
 
 router.prefix('/api');
@@ -18,5 +23,10 @@ router.get('/getTestAxiosC', getTestAxiosC);
 router.get('/getTestAxiosD', getTestAxiosD);
 router.get('/getTestAxiosE', getTestAxiosE);
 router.get('/getTestAxiosF', getTestAxiosF);
+
+router.get('/getTestAxiosErrorA', getTestAxiosErrorA);
+router.get('/getTestAxiosErrorB', getTestAxiosErrorB);
+router.get('/getTestAxiosErrorC', getTestAxiosErrorC);
+router.get('/getTestAxiosErrorD', getTestAxiosErrorD);
 
 module.exports = router;
