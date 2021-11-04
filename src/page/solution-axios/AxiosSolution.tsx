@@ -4,7 +4,11 @@ import { get } from './axion-methods';
 import Title from '@/components/Title';
 
 const AxiosSolution: FC = () => {
-  // 测试同时触发多个请求
+  /**
+   * 测试同时触发多个请求
+   * 1. 发送多个请求，全部成功返回，得到有顺序的排序结果
+   * 2. 发送多个请求，其中一个请求返回失败
+   */
   function onTriggerMultiReq () {
     const arrUrl = ['/getTestAxiosA', '/getTestAxiosB', '/getTestAxiosC'];
     const arrPromise: any = [];
@@ -31,16 +35,24 @@ const AxiosSolution: FC = () => {
       });
   }
 
-  // 测试限制最大并发请求个数
+  /**
+   * 测试限制最大并发请求个数
+   * 1. 有 10 个请求，需要发送，但是每次最多同时发出 4 个，占 4 个线程。
+   */
   function onTriggerLimitReq () {
     const arrUrl = ['/getTestAxiosA', '/getTestAxiosB', '/getTestAxiosC', '/getTestAxiosD', '/getTestAxiosE'];
     // 发送请求 --》 完成一个请求后立即往数组里面补充一个，直到请求用完 --》 按数组顺序返回请求结果
   }
 
-  // 测试取消重复的请求
+  /**
+   * 测试取消重复请求
+   * 1. 触发重复请求时，上次请求如果未响应，发出下次请求前取消上次请求
+   */
   function onTriggerCancelReq () {}
 
-  // 测试重新发送失败的请求直到 n 次
+  /**
+   * 测试重新请求，响应失败的请求直到 n 次
+   */
   function onTriggerResentReq () {}
 
   // 测试上传文件
