@@ -30,7 +30,6 @@ function limitReq (urls, handler, limit) {
   }
 }
 
-// 失败请求发送直到 n 次
 function repeatSendReq (handler, limit) {
   console.log(limit);
 }

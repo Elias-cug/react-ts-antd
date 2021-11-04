@@ -27,6 +27,8 @@ const ForkTsCheckerWebpackPlugin = require('react-dev-utils/ForkTsCheckerWebpack
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
+const ProposalDecorators = require.resolve('@babel/plugin-proposal-decorators');
+
 const postcssNormalize = require('postcss-normalize');
 
 const appPackageJson = require(paths.appPackageJson);
@@ -85,11 +87,11 @@ module.exports = function (webpackEnv) {
       isEnvDevelopment && require.resolve('style-loader'),
       isEnvProduction && {
         loader: MiniCssExtractPlugin.loader,
-        options: paths.publicUrlOrPath.startsWith('.') ? { publicPath: '../../' } : {},
+        options: paths.publicUrlOrPath.startsWith('.') ? { publicPath: '../../' } : {}
       },
       {
         loader: require.resolve('css-loader'),
-        options: cssOptions,
+        options: cssOptions
       },
       {
         loader: require.resolve('postcss-loader'),
@@ -99,15 +101,15 @@ module.exports = function (webpackEnv) {
             require('postcss-flexbugs-fixes'),
             require('postcss-preset-env')({
               autoprefixer: {
-                flexbox: 'no-2009',
+                flexbox: 'no-2009'
               },
-              stage: 3,
+              stage: 3
             }),
-            postcssNormalize(),
+            postcssNormalize()
           ],
-          sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment,
-        },
-      },
+          sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment
+        }
+      }
     ].filter(Boolean);
     if (preProcessor) {
       loaders.push(
@@ -115,14 +117,14 @@ module.exports = function (webpackEnv) {
           loader: require.resolve('resolve-url-loader'),
           options: {
             sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment,
-            root: paths.appSrc,
-          },
+            root: paths.appSrc
+          }
         },
         {
           loader: require.resolve(preProcessor),
           options: {
-            sourceMap: true,
-          },
+            sourceMap: true
+          }
         }
       );
     }
@@ -148,7 +150,7 @@ module.exports = function (webpackEnv) {
         ? info => path.relative(paths.appSrc, info.absoluteResourcePath).replace(/\\/g, '/')
         : isEnvDevelopment && (info => path.resolve(info.absoluteResourcePath).replace(/\\/g, '/')),
       jsonpFunction: `webpackJsonp${appPackageJson.name}`,
-      globalObject: 'this',
+      globalObject: 'this'
     },
     optimization: {
       minimize: isEnvProduction,
@@ -156,16 +158,16 @@ module.exports = function (webpackEnv) {
         new TerserPlugin({
           terserOptions: {
             parse: {
-              ecma: 8,
+              ecma: 8
             },
             compress: {
               ecma: 5,
               warnings: false,
               comparisons: false,
-              inline: 2,
+              inline: 2
             },
             mangle: {
-              safari10: true,
+              safari10: true
             },
             // Added for profiling in devtools
             keep_classnames: isEnvProductionProfile,
@@ -173,10 +175,10 @@ module.exports = function (webpackEnv) {
             output: {
               ecma: 5,
               comments: false,
-              ascii_only: true,
-            },
+              ascii_only: true
+            }
           },
-          sourceMap: shouldUseSourceMap,
+          sourceMap: shouldUseSourceMap
         }),
         // This is only used in production mode
         new OptimizeCSSAssetsPlugin({
@@ -185,22 +187,22 @@ module.exports = function (webpackEnv) {
             map: shouldUseSourceMap
               ? {
                   inline: false,
-                  annotation: true,
+                  annotation: true
                 }
-              : false,
+              : false
           },
           cssProcessorPluginOptions: {
-            preset: ['default', { minifyFontValues: { removeQuotes: false } }],
-          },
-        }),
+            preset: ['default', { minifyFontValues: { removeQuotes: false } }]
+          }
+        })
       ],
       splitChunks: {
         chunks: 'all',
-        name: isEnvDevelopment,
+        name: isEnvDevelopment
       },
       runtimeChunk: {
-        name: entrypoint => `runtime-${entrypoint.name}`,
-      },
+        name: entrypoint => `runtime-${entrypoint.name}`
+      }
     },
     resolve: {
       modules: ['node_modules', paths.appNodeModules].concat(modules.additionalModulePaths || []),
@@ -210,18 +212,18 @@ module.exports = function (webpackEnv) {
         '@': paths.appSrc,
         ...(isEnvProductionProfile && {
           'react-dom$': 'react-dom/profiling',
-          'scheduler/tracing': 'scheduler/tracing-profiling',
+          'scheduler/tracing': 'scheduler/tracing-profiling'
         }),
-        ...(modules.webpackAliases || {}),
-      },
+        ...(modules.webpackAliases || {})
+      }
       // plugins: [PnpWebpackPlugin, new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson, reactRefreshOverlayEntry])]
     },
     resolveLoader: {
       plugins: [
         // Also related to Plug'n'Play, but this time it tells webpack to load its loaders
         // from the current package.
-        PnpWebpackPlugin.moduleLoader(module),
-      ],
+        PnpWebpackPlugin.moduleLoader(module)
+      ]
     },
     module: {
       strictExportPresence: true,
@@ -236,8 +238,8 @@ module.exports = function (webpackEnv) {
               options: {
                 limit: imageInlineSizeLimit,
                 mimetype: 'image/avif',
-                name: 'static/media/[name].[hash:8].[ext]',
-              },
+                name: 'static/media/[name].[hash:8].[ext]'
+              }
             },
             // 图片等
             {
@@ -245,8 +247,8 @@ module.exports = function (webpackEnv) {
               loader: require.resolve('url-loader'),
               options: {
                 limit: imageInlineSizeLimit,
-                name: 'static/media/[name].[hash:8].[ext]',
-              },
+                name: 'static/media/[name].[hash:8].[ext]'
+              }
             },
             // js|mjs|jsx|ts|tsx
             {
@@ -259,9 +261,9 @@ module.exports = function (webpackEnv) {
                   [
                     require.resolve('babel-preset-react-app'),
                     {
-                      runtime: hasJsxRuntime ? 'automatic' : 'classic',
-                    },
-                  ],
+                      runtime: hasJsxRuntime ? 'automatic' : 'classic'
+                    }
+                  ]
                 ],
                 plugins: [
                   [
@@ -269,17 +271,23 @@ module.exports = function (webpackEnv) {
                     {
                       loaderMap: {
                         svg: {
-                          ReactComponent: '@svgr/webpack?-svgo,+titleProp,+ref![path]',
-                        },
-                      },
-                    },
+                          ReactComponent: '@svgr/webpack?-svgo,+titleProp,+ref![path]'
+                        }
+                      }
+                    }
                   ],
-                  isEnvDevelopment && shouldUseReactRefresh && require.resolve('react-refresh/babel'),
+                  [
+                    require.resolve('@babel/plugin-proposal-decorators'),
+                    {
+                      legacy: true
+                    }
+                  ],
+                  isEnvDevelopment && shouldUseReactRefresh && require.resolve('react-refresh/babel')
                 ].filter(Boolean),
                 cacheDirectory: true,
                 cacheCompression: false,
-                compact: isEnvProduction,
-              },
+                compact: isEnvProduction
+              }
             },
             // js|mjs
             {
@@ -294,8 +302,8 @@ module.exports = function (webpackEnv) {
                 cacheDirectory: true,
                 cacheCompression: false,
                 sourceMaps: shouldUseSourceMap,
-                inputSourceMap: shouldUseSourceMap,
-              },
+                inputSourceMap: shouldUseSourceMap
+              }
             },
             // css
             {
@@ -303,9 +311,9 @@ module.exports = function (webpackEnv) {
               exclude: cssModuleRegex,
               use: getStyleLoaders({
                 importLoaders: 1,
-                sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment,
+                sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment
               }),
-              sideEffects: true,
+              sideEffects: true
             },
             // css module
             {
@@ -314,9 +322,9 @@ module.exports = function (webpackEnv) {
                 importLoaders: 1,
                 sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment,
                 modules: {
-                  getLocalIdent: getCSSModuleLocalIdent,
-                },
-              }),
+                  getLocalIdent: getCSSModuleLocalIdent
+                }
+              })
             },
             // less
             {
@@ -325,11 +333,11 @@ module.exports = function (webpackEnv) {
               use: getStyleLoaders(
                 {
                   importLoaders: 3,
-                  sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment,
+                  sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment
                 },
                 'less-loader'
               ),
-              sideEffects: true,
+              sideEffects: true
             },
             // less module
             {
@@ -339,27 +347,27 @@ module.exports = function (webpackEnv) {
                   importLoaders: 3,
                   sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment,
                   modules: {
-                    getLocalIdent: getCSSModuleLocalIdent,
-                  },
+                    getLocalIdent: getCSSModuleLocalIdent
+                  }
                 },
                 'less-loader'
-              ),
+              )
             },
             {
               test: /\.md$/,
-              loader: 'raw-loader',
+              loader: 'raw-loader'
             },
             // 其余文件
             {
               loader: require.resolve('file-loader'),
               exclude: [/\.(js|mjs|jsx|ts|tsx)$/, /\.html$/, /\.json$/],
               options: {
-                name: 'static/media/[name].[hash:8].[ext]',
-              },
-            },
-          ],
-        },
-      ],
+                name: 'static/media/[name].[hash:8].[ext]'
+              }
+            }
+          ]
+        }
+      ]
     },
     plugins: [
       new HtmlWebpackPlugin(
@@ -367,7 +375,7 @@ module.exports = function (webpackEnv) {
           {},
           {
             inject: true,
-            template: paths.appHtml,
+            template: paths.appHtml
           },
           isEnvProduction
             ? {
@@ -381,8 +389,8 @@ module.exports = function (webpackEnv) {
                   keepClosingSlash: true,
                   minifyJS: true,
                   minifyCSS: true,
-                  minifyURLs: true,
-                },
+                  minifyURLs: true
+                }
               }
             : undefined
         )
@@ -398,15 +406,15 @@ module.exports = function (webpackEnv) {
           overlay: {
             entry: webpackDevClientEntry,
             module: reactRefreshOverlayEntry,
-            sockIntegration: false,
-          },
+            sockIntegration: false
+          }
         }),
       isEnvDevelopment && new CaseSensitivePathsPlugin(),
       isEnvDevelopment && new WatchMissingNodeModulesPlugin(paths.appNodeModules),
       isEnvProduction &&
         new MiniCssExtractPlugin({
           filename: 'static/css/[name].[contenthash:8].css',
-          chunkFilename: 'static/css/[name].[contenthash:8].chunk.css',
+          chunkFilename: 'static/css/[name].[contenthash:8].chunk.css'
         }),
       new ManifestPlugin({
         fileName: 'asset-manifest.json',
@@ -420,9 +428,9 @@ module.exports = function (webpackEnv) {
 
           return {
             files: manifestFiles,
-            entrypoints: entrypointFiles,
+            entrypoints: entrypointFiles
           };
-        },
+        }
       }),
       new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
       isEnvProduction &&
@@ -431,12 +439,12 @@ module.exports = function (webpackEnv) {
           swSrc,
           dontCacheBustURLsMatching: /\.[0-9a-f]{8}\./,
           exclude: [/\.map$/, /asset-manifest\.json$/, /LICENSE/],
-          maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
+          maximumFileSizeToCacheInBytes: 5 * 1024 * 1024
         }),
       useTypeScript &&
         new ForkTsCheckerWebpackPlugin({
           typescript: resolve.sync('typescript', {
-            basedir: paths.appNodeModules,
+            basedir: paths.appNodeModules
           }),
           async: isEnvDevelopment,
           checkSyntacticErrors: true,
@@ -449,10 +457,10 @@ module.exports = function (webpackEnv) {
             '!**/src/**/__tests__/**',
             '!**/src/**/?(*.)(spec|test).*',
             '!**/src/setupProxy.*',
-            '!**/src/setupTests.*',
+            '!**/src/setupTests.*'
           ],
           silent: true,
-          formatter: isEnvProduction ? typescriptFormatter : undefined,
+          formatter: isEnvProduction ? typescriptFormatter : undefined
         }),
       !disableESLintPlugin &&
         new ESLintPlugin({
@@ -471,11 +479,11 @@ module.exports = function (webpackEnv) {
             extends: [require.resolve('eslint-config-react-app/base')],
             rules: {
               ...(!hasJsxRuntime && {
-                'react/react-in-jsx-scope': 'error',
-              }),
-            },
-          },
-        }),
+                'react/react-in-jsx-scope': 'error'
+              })
+            }
+          }
+        })
     ].filter(Boolean),
     node: {
       module: 'empty',
@@ -487,8 +495,8 @@ module.exports = function (webpackEnv) {
       tls: 'empty',
       child_process: 'empty',
       Buffer: false,
-      process: false,
+      process: false
     },
-    performance: false,
+    performance: false
   };
 };
