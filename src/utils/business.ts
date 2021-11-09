@@ -9,3 +9,24 @@ export const getRefreshUrl = (): string => {
   }
   return path;
 };
+
+// 获取传入元素的高度
+export function getDomSize(ele: any): any {
+  let strWidth = '';
+  let strHeight = '';
+  if (!ele) {
+    console.error('未传入dom元素');
+    return false;
+  }
+  if (window.getComputedStyle) {
+    strWidth = window.getComputedStyle(ele, null)['width'];
+    strHeight = window.getComputedStyle(ele, null)['height'];
+  } else {
+    strWidth = ele.currentStyle['width'];
+    strHeight = ele.currentStyle['height'];
+  }
+  return {
+    width: Number(strWidth.substring(0, strWidth.length - 2)),
+    height: Number(strHeight.substring(0, strHeight.length - 2)),
+  };
+}

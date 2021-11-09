@@ -10,8 +10,10 @@ const {
   getTestAxiosErrorA,
   getTestAxiosErrorB,
   getTestAxiosErrorC,
-  getTestAxiosErrorD
+  getTestAxiosErrorD,
 } = require('../../controller/text-axios');
+
+const { getInfiniteList } = require('../../controller/solution');
 
 router.prefix('/api');
 router.get('/', async ctx => {
@@ -28,5 +30,8 @@ router.get('/getTestAxiosErrorA', getTestAxiosErrorA);
 router.get('/getTestAxiosErrorB', getTestAxiosErrorB);
 router.get('/getTestAxiosErrorC', getTestAxiosErrorC);
 router.get('/getTestAxiosErrorD', getTestAxiosErrorD);
+router.get('/getTestAxiosErrorD', getTestAxiosErrorD);
+
+router.get('/getInfiniteList', getInfiniteList);
 
 module.exports = router;

@@ -2,7 +2,6 @@ import React, { FC } from 'react';
 import { Card, Button } from 'antd';
 import { get, CancelToken, isCancel } from './axion-methods';
 import Title from '@/components/Title';
-import resolve from 'resolve';
 
 // 限制请求个数的通用方法
 function limitReq(urls, handler, limit) {

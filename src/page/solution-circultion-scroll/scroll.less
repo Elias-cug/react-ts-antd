@@ -1,0 +1,84 @@
+.scrollTopBtn {
+  position: fixed;
+  border-radius: 50%;
+  font-size: 12px;
+  color: white;
+  background: goldenrod;
+  bottom: 101px;
+  right: 20px;
+  z-index: 10000;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+}
+
+.infinite-list-container {
+  height: 99%;
+  overflow: hidden;
+  overflow-y: scroll;
+  position: relative;
+  -webkit-overflow-scrolling: touch;
+}
+
+.infinite-list-phantom {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  z-index: -1;
+}
+
+.infinite-list {
+  left: 0;
+  right: 0;
+  top: 0;
+  position: absolute;
+  text-align: center;
+}
+
+.infinite-list-item {
+  background: white;
+  box-shadow: 0 0 10px rgba(144, 144, 144, 0.15);
+  border-radius: 5px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* padding: 10px; */
+  margin-top: 10px;
+}
+
+.left-section {
+  width: 25%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 25px;
+  font-weight: bold;
+  color: white;
+  background: #6ab6fc;
+  border-radius: 10px;
+}
+
+.right-section {
+  height: 100%;
+  margin-left: 20px;
+  flex: 1;
+}
+
+.title {
+  font-size: 14px;
+  font-weight: 500;
+  text-align: left;
+  height: 14px;
+}
+
+.desc {
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: 400;
+  text-align: left;
+  height: 12px;
+}
