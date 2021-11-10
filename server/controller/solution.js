@@ -9,10 +9,10 @@ function mockTestAxiosDs() {
     content: Faker.random.words(),
   }));
   return new Promise(resolve => {
-    const resTime = Math.random() * 1000 * 5;
+    // const resTime = Math.random() * 1000 * 5;
     setTimeout(() => {
       resolve(testData);
-    }, resTime);
+    }, 200);
   });
 }
 async function getInfiniteList(ctx) {

@@ -1,6 +1,4 @@
 import React, { FC, useEffect, useState } from 'react';
-import Title from '@/components/Title';
-import { Card } from 'antd';
 import { get } from '@/axios/axios';
 import './scroll.less';
 import { getDomSize } from '@/utils/business';
@@ -37,6 +35,9 @@ const CircultionScroll: FC = () => {
   // 偏移量, 为了滚动条
   const [startOffset, setStartOffset] = useState(0);
 
+  // 偏移量
+  const [transform, setTransform] = useState(`translate3d(0,0px,0)`);
+
   useEffect(() => {
     getInfiniteList();
   }, []);
@@ -47,6 +48,10 @@ const CircultionScroll: FC = () => {
     setVisibleData(tmp);
   }, [listData]);
 
+  useEffect(() => {
+    setTransform(`translate3d(0,${startOffset}px,0)`);
+  }, [startOffset]);
+
   /**
    * 初始加载数据，将数据处理成可视区域数据量
    * 产生滚动时，
@@ -54,7 +59,7 @@ const CircultionScroll: FC = () => {
 
   async function getInfiniteList() {
     const res: any = await get('/api/getInfiniteList');
-    setListData(res.data.result);
+    setListData([...listData, ...res.data.result]);
   }
 
   // 获取可视区域数据
@@ -63,22 +68,32 @@ const CircultionScroll: FC = () => {
   }
 
   // 计算偏移量-- > 得到新的起止索引-- > 获取接口数据-- > 与之前数据拼接-- > 更新可视区域数据-- > 计算偏移量;
-  function onScroll() {
+  async function onScroll() {
     // 当前滚动位置
+    const scrollTop: any = document.querySelector('#list-container')?.scrollTop;
+
+    console.log('scrollTop', scrollTop);
+
     // 获取当前开始索引
+    const start = Math.floor(scrollTop / itemHeight);
     // 获取当前结束索引
+    const end = start + visibleCount;
     // 获取数据
-    //
+    if (end > listData.length) {
+      await getInfiniteList();
+    }
+    // 计算偏移量
+    setStartOffset(scrollTop - (scrollTop % itemHeight));
   }
 
   return (
     <>
       {/* <Card className='card-common'>
         <Title title='无限滚动方案' /> */}
-      <div className="infinite-list-container" onScroll={onScroll}>
+      <div id="list-container" className="infinite-list-container" onScroll={onScroll}>
         <div className="scrollTopBtn">回到顶部</div>
         <div className="infinite-list-phantom" style={{ height: listData.length * itemHeight }}></div>
-        <div className="infinite-list">
+        <div className="infinite-list" style={{ transform: transform }}>
           {visibleData.map(item => {
             return (
               <div
