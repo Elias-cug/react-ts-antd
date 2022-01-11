@@ -10,12 +10,6 @@ interface ListType {
 }
 
 const CircultionScroll: FC = () => {
-  // 可视区域高度
-  const ele = document.querySelector('.main-content');
-  console.log(ele);
-  const size = getDomSize(ele);
-  console.log(size);
-  const visibleHeight = size.height;
   // 单个条目高度
   const itemHeight = 100;
   // 全量数据
@@ -24,13 +18,12 @@ const CircultionScroll: FC = () => {
   const [visibleData, setVisibleData] = useState<Array<ListType>>([]);
 
   // 可视区域显示列表数
-  const defaultCount = Math.ceil(visibleHeight / itemHeight);
-  const [visibleCount, setVisibleCount] = useState(defaultCount);
+  const [visibleCount, setVisibleCount] = useState(0);
 
   // 起始索引
   const [start, setStart] = useState(0);
   // 结束索引
-  const [end, setEnd] = useState(start + visibleCount);
+  const [end, setEnd] = useState(0);
 
   // 偏移量, 为了滚动条
   const [startOffset, setStartOffset] = useState(0);
@@ -38,15 +31,24 @@ const CircultionScroll: FC = () => {
   // 偏移量
   const [transform, setTransform] = useState(`translate3d(0,0px,0)`);
 
+  function initContainer() {
+    // 可视区域高度
+    const ele = document.querySelector('.main-content');
+    const size = getDomSize(ele);
+    const visibleHeight = size.height;
+    setVisibleCount(Math.ceil(visibleHeight / itemHeight));
+    setEnd(start + visibleCount);
+  }
+
   useEffect(() => {
+    initContainer();
     getInfiniteList();
   }, []);
 
   useEffect(() => {
     const tmp = getVisibleData(listData);
-    console.log(tmp);
     setVisibleData(tmp);
-  }, [listData]);
+  }, [listData, start, end]);
 
   useEffect(() => {
     setTransform(`translate3d(0,${startOffset}px,0)`);
@@ -64,6 +66,7 @@ const CircultionScroll: FC = () => {
 
   // 获取可视区域数据
   function getVisibleData(listData) {
+    console.log(start, end);
     return listData.slice(start, Math.min(end, listData.length));
   }
 
@@ -72,12 +75,12 @@ const CircultionScroll: FC = () => {
     // 当前滚动位置
     const scrollTop: any = document.querySelector('#list-container')?.scrollTop;
 
-    console.log('scrollTop', scrollTop);
-
     // 获取当前开始索引
     const start = Math.floor(scrollTop / itemHeight);
+    setStart(start);
     // 获取当前结束索引
     const end = start + visibleCount;
+    setEnd(end);
     // 获取数据
     if (end > listData.length) {
       await getInfiniteList();
